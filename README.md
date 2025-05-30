@@ -1,2 +1,2 @@
 # FlaglinesAndSuch
-Celeste "Helper" mod
+Replace with your mod's readme!

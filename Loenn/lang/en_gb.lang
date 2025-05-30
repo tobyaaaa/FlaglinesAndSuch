@@ -1,0 +1,350 @@
+mods.FlaglinesAndSuch.name=Flaglines And Such
+
+
+
+
+
+
+entities.FlaglinesAndSuch/BlueBlock.placements.name.blueblocknormal=Dash State Block
+entities.FlaglinesAndSuch/BlueBlock.attributes.description.dashes=How many dashes the player should have for the block to be solid.\nWorks for any number, but visuals are not set for numbers above 2.
+
+
+
+
+entities.FlaglinesAndSuch/BonfireLight.placements.name.normal=Flickering Light
+
+#entities.FlaglinesAndSuch/BonfireLight.attributes.description.
+#TODO
+
+
+
+
+entities.FlaglinesAndSuch/CustomCloud.placements.name.fragile=Custom Cloud (fragile)
+entities.FlaglinesAndSuch/CustomCloud.placements.name.normal=Custom Cloud
+
+entities.FlaglinesAndSuch/CustomCloud.attributes.description.fragile=Whether the cloud should be fragile.
+entities.FlaglinesAndSuch/CustomCloud.attributes.description.small=Whether the cloud should be small.
+entities.FlaglinesAndSuch/CustomCloud.attributes.description.ParticleColor=The color of the cloud's particles (for normal clouds).
+entities.FlaglinesAndSuch/CustomCloud.attributes.description.FragileParticleColor=The color of the cloud's particles (for fragile clouds).
+entities.FlaglinesAndSuch/CustomCloud.attributes.description.OverrideSprite=The ID of a sprites.XML entry.\nMust have animations with the same names as the vanilla cloud XML entries (otherwise the game may crash).
+
+
+
+
+entities.FlaglinesAndSuch/CustomFlagline.placements.name.sohelpme=Custom Flagline
+
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.FlagColors=The colors of the flags, randomized.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.WireColor=The color of the wire.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.PinColor=The color of the pins holding the flags.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.MinFlagHeight=The minimum height of a given flag. Can be negative for upside-down flags.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.MaxFlagHeight=The maximum height of a given flag. Can be negative for upside-down flags.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.MinFlagLength=The minimum length of a given flag.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.MaxFlagLength=The maximum length of a given flag.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.MinSpacing=The minimum spacing between two given flags.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.MaxSpacing=The maximum spacing between two given flags.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.FlagDroopAmount=How much lower the middle of the flags are from the edges.
+entities.FlaglinesAndSuch/CustomFlagline.attributes.description.Depth=The depth of the flag in the scene. Lower values are closer to the camera, 0 being the player's position.
+
+
+
+
+entities.FlaglinesAndSuch/CustomReflectionStatue.placements.name.statue=Custom Reflection Statue
+
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.fake_heart=whether completing the codes should spawn a fake heart.
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.base_code=The base code, used for the gem colors.
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.gem_override_colors=Use this to recolor the gems. Directions D, DL, and R will be white unless specified here. Format should be direction,color,direction,color
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.hint_mural_sprites=the spritepath to the hint murals, if you're using custom ones. The actual image filenames should have 00, 01, 02, 03 appended to the end.
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.dash_flavour_sounds=Whether little flourish sounds should play when the player dashes in the same room as this entity.
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.Override_codes=A list of four dash codes the player should enter. Seperate induvidual dash directions with commas, and codes with semicolons.\nIf this field is not blank, there MUST be four codes - three semicolons - OR THE GAME WILL CRASH when you dash.
+
+
+
+
+entities.FlaglinesAndSuch/CustomSinkingPlatform.placements.name.customsinkingplatform=Custom Sinking Platform
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.texture=The texture of the platform; uses the same pathing as normal sinking platforms.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Crouching_speed=How fast the platform moves if the player riding it is crouching. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Pressed_speed=How fast the platform moves with a player on it. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Idle_speed=How fast the platform moves for a short duration after the player has left the platform. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Unpressed_speed=How fast the platform moves when completely unoccupied. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Look_up_speed=How fast the platform moves if the player riding it is looking up. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.HoldableSpeed=How fast the platform moves when a holdable (and not the player) is on it. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Idle_time=How long, after the player leaves the platform, should the platform use Idle Speed.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Accelerations=Comma seperated list of six numbers, representing Unpressed, Idle, Pressed, Crouched, Looking-up, and Holdable accelerations in that order. Defaults to 400,600,400,400,400,400.\nBest left to default values in most cases.
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.no_bg_line=Whether to render the linking line between the platform's start and end.
+
+
+entities.FlaglinesAndSuch/CustomSinkingBlock.placements.name.customsinkingblock=Custom Sinking Block
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.texture=The texture of the platform; uses the same pathing as normal sinking platforms.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Crouching_speed=How fast the platform moves if the player riding it is crouching. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Pressed_speed=How fast the platform moves with a player on it. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Idle_speed=How fast the platform moves for a short duration after the player has left the platform. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Unpressed_speed=How fast the platform moves when completely unoccupied. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Look_up_speed=How fast the platform moves if the player riding it is looking up. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.HoldableSpeed=How fast the platform moves when a holdable (and not the player) is on it. Negative values go towards the starting point.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Idle_time=How long, after the player leaves the platform, should the platform use Idle Speed.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Accelerations=Comma seperated list of six numbers, representing Unpressed, Idle, Pressed, Crouched, Looking-up, and Holdable accelerations in that order.\nDefaults to 400,600,400,400,400,400.\nBest left to default values in most cases.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.no_bg_line=Whether to render the linking line between the platform's start and end.
+
+
+entities.FlaglinesAndSuch/CustomWhiteBlock.placements.name.normal=Custom White Block
+
+entities.FlaglinesAndSuch/CustomWhiteBlock.attributes.description.hold_time=How long the player needs to stay crouched on the block to fall through.
+entities.FlaglinesAndSuch/CustomWhiteBlock.attributes.description.sound_index=What sound the block should make when stepped on.
+entities.FlaglinesAndSuch/CustomWhiteBlock.attributes.description.permasolid_bgtiles=When enabled, this option will override the vanilla behavior by making bgtiles solid until the player leaves the room. Otherwise, bgtiles will only stay solid until there is no Crystal Heart in the room (or if no Heart was present from the start, effectively never)
+
+
+
+
+entities.FlaglinesAndSuch/FacingBlock.placements.name.left=Facing Block (left)
+entities.FlaglinesAndSuch/FacingBlock.placements.name.right=Facing Block (right)
+
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.left=Whether the block should be active when the entity in question is facing left.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.trap_player=If enabled, the block will activate even if the player, theo, ect. is inside it--effectively trapping them (and if it's the player, regaining their dash)
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.do_cassette_wobble=Enables a visual-only bounce when the block activates.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.disabled_color=The color of the block's "drop shadow", as well as the color of any attached spikes and springs when disabled.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.enabled_color=The block's color.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.sound_index=What sound the block makes.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.enabled_sprite=The spritepath the block should use when active.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.disabled_sprites=The spritepath the block should use when active. This should actually be two images: <this field>00.png and <this field>01.png. The latter is used if "left" is checked.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.actor_type=Which type of entity this block checks for whether it should be active.
+
+
+
+
+
+entities.FlaglinesAndSuch/tminusHazardFlagController.placements.name.HazardFlagController=Hazard Flag Controller
+entities.FlaglinesAndSuch/tminusHazardFlagController.attributes.description.setFlag=The flag to be set.
+entities.FlaglinesAndSuch/tminusHazardFlagController.attributes.description.eventFlags=The "events" corresponding to each list of flags.
+entities.FlaglinesAndSuch/tminusHazardFlagController.attributes.description.conditionFlags=A list of lists of flags (a,b,c;a2,b2,c2)- each list of flags corresponds to each event flag.\nThe set flag will be set to true if an event flag and eny flag from its corresponding list is enabled.
+
+
+
+
+entities.FlaglinesAndSuch/PlatformJelly.placements.name.pjellynormal=Platform Jellyfish
+
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.bubble=Whether the jellyfish should be suspended midair before it's grabbed.
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.tutorial=Whether the jellyfish should tell you how to grab it.
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.platformSound=The sound of the platform when walked on.
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.noGrabbing=Whether the player should be disallowed from grabbing the jellyfish.
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.restLower=Displaces the interaction hitbox eight pixels up, such that the resting spot for the jellyfish lines up with the default "no grabbing" sprite.
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.OverrideSprite=The name of a Sprites.XML entry. Must have the same animation names as the entry defined in FlaglinesAndSuch's custom sprites.xml (otherwise the game may crash).
+entities.FlaglinesAndSuch/PlatformJelly.attributes.description.bigHitbox= If enabled, makes the platform's hitbox a few pixels wider on each side, removing the small gap between platform jellyfishes placed four tiles apart.
+
+
+
+
+entities.FlaglinesAndSuch/Sawblade.placements.name.normal=Sawblade
+
+entities.FlaglinesAndSuch/Sawblade.attributes.description.size=How big the blade is.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.move_time=The movement speed of the blade, if there's a node.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.pause_time=The pause between movements, if there's a node
+entities.FlaglinesAndSuch/Sawblade.attributes.description.start_offset=How far into the blade's motion it is when the room loads, if there's a node.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.time_offset=If there's a node, how far does the blade start into its cycle? Measured in seconds.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.easing=Whether the blade should ease in and out of its nodes. Useful if "wrap" is enabled.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.wrap=Whether the blade should teleport to its starting position once it reaches its node.\n\nYes, this is in the White Palace, but every video I can find skips that section.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.draw_track=Whether to draw a decorative track behind the saw's path.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.track_sprite=What sprite the decorative track, if drawn, should use;\nrelative to the path "Graphics/Atlases/Gameplay/objects/FlaglinesAndSuch/Sawblade/line/".\nBe sure to reference the image in this mod's files. it's in three parts: an endpoint, a "filler", and the center.\nA small portion of the sprite is unused. Credit to SummitBadeline for these sprites.
+
+
+
+entities.FlaglinesAndSuch/ShootingEye.placements.name.ShootingEye=Shooting Eye (FLCC/kunogi)
+
+entities.FlaglinesAndSuch/BloomedOshiro.placements.name.BloomedOshiro=Bloomed Oshiro (FLCC/kunogi)
+
+entities.FlaglinesAndSuch/StandBox.placements.name.StandBox=Stand Box (FLCC/kunogi)
+
+entities.FlaglinesAndSuch/ShyGhost.placements.name.ShyGhost=Shy Ghost (FLCC/kunogi)
+
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.speed=The ghost's speed.
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.reversed=Whether the ghost follows madeline when being watched, or vice versa.
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.right=Horizontally flip the ghost.
+
+entities.FlaglinesAndSuch/LightBerry.placements.name.LightBerry=Light Berry (FLCC/kunogi)
+entities.FlaglinesAndSuch/LightBerry.placements.name.LightBerryDark=Dark Berry (FLCC/kunogi)
+
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.checkpointID=Which checkpoint the berry shows up in.
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.order=The berry oder within the checkpoint.
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.isDark=The berry's color.
+entities.FlaglinesAndSuch/ShyGhost.attributes.description.moon=Whether the berry is secret to the berry counter.
+
+
+entities.FlaglinesAndSuch/DustNoShrinkController.placements.name.Dust No Shrink Controller=Dust No Shrink Controller (FLCC/Lilybeevee)
+entities.FlaglinesAndSuch/DustNoShrinkController.attributes.description.enable=Whether this controller turns the effect on or off.
+
+
+
+entities.FlaglinesAndSuch/DustSpikesUp.placements.name.up=Dust Spikes (Up)
+entities.FlaglinesAndSuch/DustSpikesDown.placements.name.down=Dust Spikes (Down)
+entities.FlaglinesAndSuch/DustSpikesLeft.placements.name.left=Dust Spikes "Left"
+entities.FlaglinesAndSuch/DustSpikesRight.placements.name.right=Dust Spikes (Right)
+
+
+
+
+
+entities.FlaglinesAndSuch/TriangleFlagline.placements.name.sohelpme=Triangular Flagline
+
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.FlagColors=The colors of the flags.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.WireColor=The color of the wire.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.PinColor=The color of the pins holding the flags.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.MinFlagHeight=The minimum height of a given flag. Can be negative for upside-down flags.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.MaxFlagHeight=The maximum height of a given flag. Can be negative for upside-down flags.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.MinFlagLength=The minimum length of a given flag.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.MaxFlagLength=The maximum length of a given flag.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.MinSpacing=The minimum spacing between two given flags.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.MaxSpacing=The maximum spacing between two given flags.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.FlagDroopAmount=How much lower the middle of the flags are from the edges.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.Depth=The depth of the flag in the scene. Lower values are closer to the camera, 0 being the player's position.
+entities.FlaglinesAndSuch/TriangleFlagline.attributes.description.RandomColors=Whether the flag's colors should be in random order, or the order specified in "Flag Colors"
+
+
+
+
+entities.FlaglinesAndSuch/Wingmould.placements.name.normal=Wingmould
+entities.FlaglinesAndSuch/Wingmould.attributes.description.OverrideSprite=sprites.xml entry to use instead of the normal one.\nNeeds the same animations as the default one found in this mod's Graphics/FlaglinesAndSuch/CustomSprites.xml
+
+
+
+entities.FlaglinesAndSuch/NailHittableSprite.placements.name.nailnormal=Nail Hittable Sprite
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.SpritesXMLEntry=A sprites.xml entry that this entity will use as a graphic.\nNeeds an "idle" animation and (if breakable) a "break" one (vanilla's "glass" sprites.xml entry is a good example)
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.HitSound=What sound the entity makes when hit with the nail.
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.Breakable=Whether the entity should break when hit, rendering it one-use.
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.DoMomentum=Whether the player should recieve backwards momentum when hitting the entity.
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.RefillDash=Whether the player's dash should refill when hitting the entity.
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.spriteTopLeft=Whether the entity's sprite should appear in the top left, or very center, of the hitbox.
+entities.FlaglinesAndSuch/NailHittableSprite.attributes.description.DebrisTileID=When broken (requires "breakable" option to be true), the entity will spawn this tile ID of debris; leave blank for none.
+
+
+entities.FlaglinesAndSuch/MusicParamOnFlag.placements.name.MusicParamToFlagCount=Match Music Param to Flag Count Controller
+entities.FlaglinesAndSuch/MusicParamOnFlag.attributes.description.parameter=The parameter that will be changed.
+entities.FlaglinesAndSuch/MusicParamOnFlag.attributes.description.eventFlags=A comma seperated list of flags. While the player is in this room, the parameter will be changed to match the number of these flags which are True.
+entities.FlaglinesAndSuch/MusicParamOnFlag.attributes.description.throughWholeMap=Whether the effect lasts throughout the map, instead of just in this room. Will not persist through a hot-reload or debug map use.
+
+
+
+
+
+
+triggers.FlaglinesAndSuch/ChangeDreaming.placements.name.ChangeDreaming=Change Dreaming
+triggers.FlaglinesAndSuch/DialogIfFlag.placements.name.DialogIfFlag=Dialog If Flag
+triggers.FlaglinesAndSuch/FlagIfBerry.placements.name.FlagIfBerry=Flag If Berry
+triggers.FlaglinesAndSuch/FlagIfFlag.placements.name.FlagIfFlag=Flag If Flag
+triggers.FlaglinesAndSuch/FlagLightFade.placements.name.LightFadeIfFlag=Light Fade If Flag
+triggers.FlaglinesAndSuch/FlagLogicGate.placements.name.FlagLogicGate=Flag Logic Gate
+triggers.FlaglinesAndSuch/GroundRefillsIfFlag.placements.name.GroundRefillsIfFlag=Ground Refills If Flag
+triggers.FlaglinesAndSuch/MiniTextboxIfFlag.placements.name.MiniTextboxIfFlag=Mini Textbox If Flag
+triggers.FlaglinesAndSuch/MusicIfFlag.placements.name.MusicIfFlag=Music If Flag
+
+
+
+#custom boss bg
+style.effects.FlaglinesAndSuch/customBossField.name=Boss starfield (Custom)
+
+style.effects.FlaglinesAndSuch/customBossField.description.bg_color=The color of the solid background added by the effect. If this is not exactly 6 digits long the background will be transparent.
+style.effects.FlaglinesAndSuch/customBossField.description.alpha=The transparancy of the particles.
+style.effects.FlaglinesAndSuch/customBossField.description.count=how many particles there are.
+style.effects.FlaglinesAndSuch/customBossField.description.particle_colors=comma sperated hex values that determine what colors the particles are.
+style.effects.FlaglinesAndSuch/customBossField.description.speed_min=the minimum speed of a given particle.
+style.effects.FlaglinesAndSuch/customBossField.description.speed_max=the maximum speed of a given particle.
+style.effects.FlaglinesAndSuch/customBossField.description.pos_x_min=These four values determine where the particles are initially drawn on the screen.\nFor the majority of use cases I recommend using default values.
+style.effects.FlaglinesAndSuch/customBossField.description.pos_x_max=These four values determine where the particles are initially drawn on the screen.\nFor the majority of use cases I recommend using default values.
+style.effects.FlaglinesAndSuch/customBossField.description.pos_y_min=These four values determine where the particles are initially drawn on the screen.\nFor the majority of use cases I recommend using default values.
+style.effects.FlaglinesAndSuch/customBossField.description.pos_y_max=These four values determine where the particles are initially drawn on the screen.\nFor the majority of use cases I recommend using default values.
+style.effects.FlaglinesAndSuch/customBossField.description.dir_x=the x direction the particles will travel in rooms with height less than or equal to their length.
+style.effects.FlaglinesAndSuch/customBossField.description.dir_y=the y direction the particles will travel in rooms with height less than or equal to their length.
+style.effects.FlaglinesAndSuch/customBossField.description.dir_x_alt=the x direction the particles will travel in rooms taller than they are wide.
+style.effects.FlaglinesAndSuch/customBossField.description.dir_y_alt=the y direction the particles will travel in rooms taller than they are wide.
+style.effects.FlaglinesAndSuch/customBossField.description.scroll_x=The parallax scroll value for the particles on the x axis.
+style.effects.FlaglinesAndSuch/customBossField.description.scroll_y=the parallax scroll value for the particles on the y axis.
+style.effects.FlaglinesAndSuch/customBossField.description.stretch_multiplier=values of this number higher than one make the particles longer and thinner; values less than one will do the opposite. For backward-compatibility reasons, setting this to 0 wil be overriden to 1.
+
+#custom godrays
+style.effects.FlaglinesAndSuch/customGodrays.name=Godrays (custom)
+
+style.effects.FlaglinesAndSuch/customGodrays.description.min_width=minimum value of the wide edge of a given godray.
+style.effects.FlaglinesAndSuch/customGodrays.description.max_width=maximum value of the wideedge of a given godray.
+style.effects.FlaglinesAndSuch/customGodrays.description.min_length=minimum value of the tall edge of a given godray.
+style.effects.FlaglinesAndSuch/customGodrays.description.max_length=maximum value of the tall edge of a given godray.
+style.effects.FlaglinesAndSuch/customGodrays.description.duration_base=The average time a given godray lasts for.
+style.effects.FlaglinesAndSuch/customGodrays.description.duration_variance=How big the range is of times a given godray can last for.
+style.effects.FlaglinesAndSuch/customGodrays.description.ray_color_alpha=How transparent the godrays are when in the middle of their lifespan. 1.0 is fully opaque.
+style.effects.FlaglinesAndSuch/customGodrays.description.ray_color=The color of the godrays.
+style.effects.FlaglinesAndSuch/customGodrays.description.fade_to_color=If specified, the godrays will fade from their given base color to this color as their lifespan progresses.\nIf left blank they will stay the same color. Normal godrays stay the same color.
+style.effects.FlaglinesAndSuch/customGodrays.description.scroll_x=The parallax scroll value for the godrays on the x axis.
+style.effects.FlaglinesAndSuch/customGodrays.description.scroll_y=The parallax scroll value for the godrays on the y axis.
+style.effects.FlaglinesAndSuch/customGodrays.description.speed_x=How fast the godrays move to the right. Normal godrays don't move on this axis.
+style.effects.FlaglinesAndSuch/customGodrays.description.speed_y=How fast the godrays move down. For normal godrays this value is 8.
+style.effects.FlaglinesAndSuch/customGodrays.description.ray_count=How many godrays there are.
+style.effects.FlaglinesAndSuch/customGodrays.description.angle_x=The x component specifying the angle of the sides of the godrays.
+style.effects.FlaglinesAndSuch/customGodrays.description.angle_y=The y component specifying the angle of the sides of the godrays.
+
+#custom dreamstars
+style.effects.FlaglinesAndSuch/customDreamStars.name=Dreamstars (custom)
+
+style.effects.FlaglinesAndSuch/customDreamStars.description.count=How many squares are present for the effect.
+style.effects.FlaglinesAndSuch/customDreamStars.description.minSpeed=The maximum speed of any given square in the direction of travel.
+style.effects.FlaglinesAndSuch/customDreamStars.description.maxSpeed=The minimum speed of any given square in the direction of travel.
+style.effects.FlaglinesAndSuch/customDreamStars.description.minSize=The minimum size of any given square.
+style.effects.FlaglinesAndSuch/customDreamStars.description.maxSize=The maximum size any given square.
+style.effects.FlaglinesAndSuch/customDreamStars.description.Color=The color of the effect.
+style.effects.FlaglinesAndSuch/customDreamStars.description.AngleX=The X component of the vector determining the effect's angle of travel.
+style.effects.FlaglinesAndSuch/customDreamStars.description.AngleY=The Y component of the vector determining the effect's angle of travel.
+style.effects.FlaglinesAndSuch/customDreamStars.description.Scroll=The parallax scroll value for the effect. Applies to both the X and Y directions.
+style.effects.FlaglinesAndSuch/customDreamStars.description.shape=What shape the dreamstars appear as.
+
+#summit boost bg
+style.effects.FlaglinesAndSuch/SummitBoostBackground.name=Summit Boost BG
+
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.draw_background=whether the solid background color should be visible.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.draw_bars=whether the colored bars on both sides of the screen should be visible.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.draw_streaks=whether the streaks are visible.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.draw_clouds=whether the clouds should be visible.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.Angle=you shouldn't be seeing this aaaaaaaaaaaaaaaaaaaa it's super WIP and doesn't work at all.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.background_color=the color of the solid background. Defaults are "75a0ab" and "000000".
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.bar_color=the color of the colored bars on both sides of the screen. Usually the same as the first streak color.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.streak_count=how many streaks there are.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.streak_speed_min=the minimum speed of a given streak.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.streak_speed_max=the maximum speed of any given streak.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.streak_colors=a comma-seperated list of hex values for the streak colors. Defaults are "ffffff,e69ecb" and "041b44,011230".
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.streak_alpha=the transparency of the streaks.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.cloud_count=how many clouds there are.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.cloud_speed_min=the minimum speed of a given cloud.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.cloud_speed_max=the maximum speed of any given cloud.
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.cloud_color=the color of the clouds. Defaults are "b64a86" and "082644".
+style.effects.FlaglinesAndSuch/SummitBoostBackground.description.cloud_alpha=the transparency of the clouds.
+
+#Vaporwave grid
+style.effects.FlaglinesAndSuch/VaporwaveGrid.name=Vaporwave Grid
+
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.color=The color of the grid.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.Horizontal_lines=How many horizontal lines there are.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.Vertical_lines=How many vertical/diagonal lines there are.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.Top_Scroll=The parallax scroll of the top of the effect.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.Bottom_Scroll=The parallax scroll of the bottom of the effect.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.Top_Height=How high up the screen the "horizon" of the grid is.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.Flip_Y=Flips the effect vertically. Currently unusably buggy. Vexatos denies any responsibility for bugs.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.view_X=This and view Y influence how the horizontal lines are spaced.\nthis X value must be negative otherwise you get no lines at all, and lines will move slower if the number is further from zero. 
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.view_Y=This and view Y influence how the horizontal lines are spaced.\nthis Y value should be greater than the "Height" value.
+style.effects.FlaglinesAndSuch/VaporwaveGrid.description.speed_Y=This value also influences the speed of the horizontal lines.
+
+
+
+
+
+style.effects.FlaglinesAndSuch/GeometricBlackhole.name=Geometric Blackhole
+style.effects.FlaglinesAndSuch/SineParallaxStyleground.name=Sine Parallax Styleground
+
+
+style.effects.FlaglinesAndSuch/PolygonEffect.name=3D Polygon (manual)
+style.effects.FlaglinesAndSuch/PolygonEffect.description.positions=This is a list of points (sets of three values). Each set is seperated by a semicolon, each value by a comma.\nEach point (set) contains the following values: An X position, a Y position, and a Z position.\nThese mean the same as in the (much easier to use) cube preset, sans width/ect.\nEach three points in the list will define a triangle that will show up in the map.
+style.effects.FlaglinesAndSuch/PolygonEffect.description.VisibleSide=Only the front face of each triangle is visible, controlled by this.\nIf you know you should be able to see your triangle, but don't (or if your polyhedron appears inside out) flip this setting.\nIf only one triangle is wrong, flip the order of the first two points in that triangle instead.
+style.effects.FlaglinesAndSuch/PolygonEffect.description.colors=A list of colors for each triangle.\nIf this list is shorter than the amount of triangles, the last color will be used for the remaining triangles.
+
+style.effects.FlaglinesAndSuch/PolygonEffectCube.name=3D Polygon (cube)
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.XPos=The X position of the left side of the cube (assuming 1.0 depth).\nMeasured in World Position, which can be aquired using the debug console.
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.YPos=The Y position of the top side of the cube (assuming 1.0 depth).\nMeasured in World Position, which can be aquired using the debug console.
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.ZPos=How far into the background the front face of the cube should be.\nYou could picture this setting "sliding" the cube into the background; its position and size changes but only because of perspective
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.Width=The width of the cube.\nNote, if your cube is at depth X and you want the cube to APPEAR Y pixels wide, you'll want to put Y/X into this spot.
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.Height=The height of the cube.\nNote, if your cube is at depth X and you want the cube to APPEAR Y pixels tall, you'll want to put Y/X into this spot.
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.Depth=How deep the cube is.\nNote that since depth isn't linear, two cubes with the same depth values at different ZPos's will have different actual depth.\nAlso, refrain from having depth greater than Zpos; if you want a cube to extend into negative scroll, use two seperate cubes instead.
+style.effects.FlaglinesAndSuch/PolygonEffectCube.description.colors=A list of colors for each face of the cube (front>top>bot>left>right).\nIf this list is less than 5, the last color will be used for the remaining faces.

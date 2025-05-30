@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Sprites>
+
+  <FlaglinesAndSuch_grabWall_Top path="objects/wallBooster/" start="hot">
+    <Loop id="hot" path="fireTop" frames="0-7" delay="0.035"/>
+  </FlaglinesAndSuch_grabWall_Top>
+  <FlaglinesAndSuch_grabWall_Mid path="objects/wallBooster/" start="hot">
+    <Loop id="hot" path="fireMid" frames="0-7" delay="0.035"/>
+  </FlaglinesAndSuch_grabWall_Mid>
+  <FlaglinesAndSuch_grabWall_Bottom path="objects/wallBooster/" start="hot">
+    <Loop id="hot" path="fireBottom" frames="0-7" delay="0.035"/>
+  </FlaglinesAndSuch_grabWall_Bottom>
+
+
+</Sprites>
