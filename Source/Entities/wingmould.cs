@@ -53,9 +53,9 @@ namespace FlaglinesAndSuch
             Add(sine = new SineWave(0.5f, 0f).Randomize());
 
 
-            if (data.Has("no_nail_kuksa"))
+            if (data.Has("no_nail_kelper"))
             {
-                no_nail_kelper = data.Bool("no_nail_kuksa");
+                no_nail_kelper = data.Bool("no_nail_kelper");
             }
             else
             {
