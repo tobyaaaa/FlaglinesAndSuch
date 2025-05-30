@@ -14,6 +14,8 @@ Sawblade.fieldInformation = {
         editable = true
     },
 }
+Sawblade.ignoredFields = {"no_nail_kelper"}
+
 Sawblade.placements = {
     {
         name = "normal",
@@ -28,11 +30,12 @@ Sawblade.placements = {
             draw_track=false,
             track_sprite="default",
             no_nail_flaglines=false,
-            no_nail_kuksa=false,
+            no_nail_kelper=false,
             silent=false
         }
     }
 }
+
 
 function Sawblade.sprite(room, entity)
     local texture = "objects/FlaglinesAndSuch/Sawblade/small00"

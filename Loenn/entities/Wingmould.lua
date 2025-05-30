@@ -5,12 +5,14 @@ local Wingmould = {}
 Wingmould.name = "FlaglinesAndSuch/Wingmould"
 Wingmould.depth = 0
 Wingmould.texture = "objects/FlaglinesAndSuch/Wingmould/idle00"
+
+Wingmould.ignoredFields = {"no_nail_kelper"}
 Wingmould.placements = {
     {
         name = "normal",
         data = {
             OverrideSprite = "",
-            no_nail_kuksa=false
+            no_nail_kelper=false
         }
     }
 }
