@@ -1,5 +1,5 @@
 - Name: FlaglinesAndSuch
-  Version: 1.900.0
+  Version: 1.6.40
   DLL: bin/FlaglinesAndSuch.dll
   Dependencies:
     - Name: EverestCore
