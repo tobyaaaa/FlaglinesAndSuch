@@ -15,18 +15,6 @@ TriangleFlagline.fieldInformation = {
     PinColor = {
         fieldType = "color"
     },
-    MinFlagHeight = {
-        fieldType = "integer"
-    },
-    MaxFlagHeight = {
-        fieldType = "integer"
-    },
-    MinFlagLength = {
-        fieldType = "integer"
-    },
-    MaxFlagLength = {
-        fieldType = "integer"
-    },
     MinSpacing = {
         fieldType = "integer"
     },
@@ -44,10 +32,6 @@ TriangleFlagline.placements = {
             FlagColors = "d85f2f,d82f63,2fd8a2,d8d62f",
             WireColor = "474c70",
             PinColor = "676e6e",
-            MinFlagHeight = 10,
-            MaxFlagHeight = 10,
-            MinFlagLength = 10,
-            MaxFlagLength = 10,
             MinSpacing = 2,
             MaxSpacing = 10,
             FlagDroopAmount = 0.2,
