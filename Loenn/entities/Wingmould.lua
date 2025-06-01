@@ -6,7 +6,6 @@ Wingmould.name = "FlaglinesAndSuch/Wingmould"
 Wingmould.depth = 0
 Wingmould.texture = "objects/FlaglinesAndSuch/Wingmould/idle00"
 
-Wingmould.ignoredFields = {"no_nail_kelper"}
 Wingmould.placements = {
     {
         name = "normal",

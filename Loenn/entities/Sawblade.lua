@@ -11,10 +11,9 @@ Sawblade.nodeLineRenderType = "line"
 Sawblade.fieldInformation = {
     size = {
         options = { "tiny", "small", "big" },
-        editable = true
+        editable = false
     },
 }
-Sawblade.ignoredFields = {"no_nail_kelper"}
 
 Sawblade.placements = {
     {
@@ -23,7 +22,6 @@ Sawblade.placements = {
             size = "small",
             move_time = 1.0,
             pause_time = 1.0,
-            --start_offset = 0.0,
             time_offset = 0.0,
             easing = true,
             wrap = false,
@@ -31,7 +29,8 @@ Sawblade.placements = {
             track_sprite="default",
             no_nail_flaglines=false,
             no_nail_kelper=false,
-            silent=false
+            silent=false,
+            OverrideSprite=""
         }
     }
 }

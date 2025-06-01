@@ -43,31 +43,30 @@ namespace FlaglinesAndSuch
 
         public Sawblade(EntityData data, Vector2 offset) : base(data.Position + offset)
         {
+            String texture = data.Attr("OverrideSprite");
+            if (texture == "")
+            {
+                Add(sprite = Class1.spriteBank.Create("Sawblade"));
+            }
+            else {
+                Add(sprite = GFX.SpriteBank.Create(texture));
+            }
             switch (data.Attr("size"))
             {
                 case "tiny":
                     base.Collider = new Circle(8f);
-                    Add(sprite = Class1.spriteBank.Create("Sawblade"));
+                    //Add(sprite = Class1.spriteBank.Create("Sawblade"));
                     sprite.Play("tiny", restart: true);
                     break;
                 default:
                     base.Collider = new Circle(10f);
-                    Add(sprite = Class1.spriteBank.Create("Sawblade"));
-                    break;
-                case "medium":
-                    base.Collider = new Circle(14);
-                    Add(sprite = Class1.spriteBank.Create("Sawblade"));
+                    //Add(sprite = Class1.spriteBank.Create("Sawblade"));
                     break;
                 case "big":
                     base.Collider = new Circle(24f);
-                    Add(sprite = Class1.spriteBank.Create("Sawblade"));
+                    //Add(sprite = Class1.spriteBank.Create("Sawblade"));
                     sprite.Play("big", restart: true);
                     break;
-                    //case "huge":
-                    //base.Collider = new Circle(28f);
-                    //Add(sprite = FlaglinesAndSuchModule.spriteBank.Create("Sawblade"));
-                    //sprite.Play("huge", restart: true);
-                    //break;
             }
 
             if (data.Nodes.Length == 1)

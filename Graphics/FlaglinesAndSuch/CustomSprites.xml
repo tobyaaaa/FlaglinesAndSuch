@@ -44,7 +44,6 @@
     <Loop id="tiny" path="tiny" delay="0.045"/>
     <Loop id="small" path="small" delay="0.045"/>
     <Loop id="big" path="big" delay="0.045"/>
-    <Loop id="huge" path="huge" delay="0.045"/>
   </Sawblade>
 
   <PlayerNail path="effects/FlaglinesAndSuch/nailSwipe/">

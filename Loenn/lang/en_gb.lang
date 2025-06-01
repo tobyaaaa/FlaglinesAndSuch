@@ -144,7 +144,10 @@ entities.FlaglinesAndSuch/Sawblade.attributes.description.easing=Whether the bla
 entities.FlaglinesAndSuch/Sawblade.attributes.description.wrap=Whether the blade should teleport to its starting position once it reaches its node.\n\nYes, this is in the White Palace, but every video I can find skips that section.
 entities.FlaglinesAndSuch/Sawblade.attributes.description.draw_track=Whether to draw a decorative track behind the saw's path.
 entities.FlaglinesAndSuch/Sawblade.attributes.description.track_sprite=What sprite the decorative track, if drawn, should use;\nrelative to the path "Graphics/Atlases/Gameplay/objects/FlaglinesAndSuch/Sawblade/line/".\nBe sure to reference the image in this mod's files. it's in three parts: an endpoint, a "filler", and the center.\nA small portion of the sprite is unused. Credit to SummitBadeline for these sprites.
-
+entities.FlaglinesAndSuch/Sawblade.attributes.description.OverrideSpriteName=The name of a Sprites.XML entry which would replace the blade's sprites.\n See Mods/FlaglinesAndSuch/Graphics/FlaglinesAndSuch/Sprites.XML for an example.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.silent=Whether the blade should make noise.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.no_nail_flaglines=Whether the Flaglines and Such nail should hit this blade.
+entities.FlaglinesAndSuch/Sawblade.attributes.description.no_nail_kelper=Whether the Kelper nail should hit this blade.
 
 
 entities.FlaglinesAndSuch/ShootingEye.placements.name.ShootingEye=Shooting Eye (FLCC/kunogi)
