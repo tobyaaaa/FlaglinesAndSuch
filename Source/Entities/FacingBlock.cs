@@ -30,7 +30,9 @@ namespace FlaglinesAndSuch
 
             public override void Render()
             {
-                Draw.Rect(block.X, block.Y + block.Height - 8f, block.Width, 8 + block.blockHeight, color);
+                //if (drawBgBase) {
+                    Draw.Rect(block.X, block.Y + block.Height - 8f, block.Width, 8 + block.blockHeight, color);
+                //}
             }
         }
 
@@ -54,7 +56,7 @@ namespace FlaglinesAndSuch
         private List<Image> pressed = new List<Image>();
         private List<Image> solid = new List<Image>();
         private List<Image> all = new List<Image>();
-        private BoxSide side;
+        private BoxSide side = null;
 
         private Player entity;
         public FacingActorTypes ActorType;
@@ -69,6 +71,7 @@ namespace FlaglinesAndSuch
 
         String DisabledSprite;
         String EnabledSprite;
+        bool drawBgBase = true;
 
         //int debug;
 
@@ -83,8 +86,7 @@ namespace FlaglinesAndSuch
             DisabledSprite = data.Attr("disabled_sprites");
             EnabledSprite = data.Attr("enabled_sprite");
             ActorType = data.Enum("actor_type", FacingActorTypes.Player);
-            //ActorType = (FacingActorTypes) Enum.Parse(typeof(FacingActorTypes), data.Attr("dependant_actor_type"));
-            //debug = data.ID;
+            drawBgBase = data.Has("draw_bottom") ? data.Bool("draw_bottom") : true;
         }
 
         private bool QueryActors<T>(Func<T, bool> result) where T : Entity
@@ -150,7 +152,9 @@ namespace FlaglinesAndSuch
         public override void Awake(Scene scene)
         {
             base.Awake(scene);
-            scene.Add(side = new BoxSide(this, DisabledColor));
+            if (drawBgBase) { 
+                scene.Add(side = new BoxSide(this, DisabledColor));
+            }
             foreach (StaticMover staticMover in staticMovers)
             {
                 Spikes spikes = staticMover.Entity as Spikes;
@@ -460,22 +464,24 @@ namespace FlaglinesAndSuch
             }
             else
             {
-                Player entity = base.Scene.Tracker.GetEntity<Player>();
-                if (entity != null && entity.Top >= base.Bottom - 1f)
-                {
-                    base.Depth = 10;
-                }
-                else
-                {
+                //Player entity = base.Scene.Tracker.GetEntity<Player>();
+                //if (entity != null && entity.Top >= base.Bottom - 1f)
+                //{
+                //    base.Depth = 10;
+                //}
+                //else
+                //{
                     base.Depth = -10;
-                }
+                //}
             }
             foreach (StaticMover staticMover in staticMovers)
             {
                 staticMover.Entity.Depth = base.Depth + 1;
             }
-            side.Depth = base.Depth + 5;
-            side.Visible = (blockHeight > 0);
+            if (side != null) {
+                side.Depth = base.Depth + 5;
+                side.Visible = (blockHeight > 0);
+            }
             //occluder.Visible = Collidable;
             foreach (Image item in solid)
             {

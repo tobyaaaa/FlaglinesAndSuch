@@ -38,7 +38,8 @@ FacingBlock.placements = {
             sound_index = 35,
             enabled_sprite = "objects/cassetteblock/solid",
             disabled_sprites = "objects/cassetteblock/pressed",
-            actor_type = "Player"
+            actor_type = "Player",
+            draw_bottom = true,
         }
     },
     {
@@ -54,7 +55,8 @@ FacingBlock.placements = {
             sound_index = 35,
             enabled_sprite = "objects/cassetteblock/solid",
             disabled_sprites = "objects/cassetteblock/pressed",
-            actor_type = "Player"
+            actor_type = "Player",
+            draw_bottom = true,
         }
     }
 }

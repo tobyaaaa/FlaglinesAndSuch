@@ -107,6 +107,7 @@ entities.FlaglinesAndSuch/FacingBlock.attributes.description.sound_index=What so
 entities.FlaglinesAndSuch/FacingBlock.attributes.description.enabled_sprite=The spritepath the block should use when active.
 entities.FlaglinesAndSuch/FacingBlock.attributes.description.disabled_sprites=The spritepath the block should use when active. This should actually be two images: <this field>00.png and <this field>01.png. The latter is used if "left" is checked.
 entities.FlaglinesAndSuch/FacingBlock.attributes.description.actor_type=Which type of entity this block checks for whether it should be active.
+entities.FlaglinesAndSuch/FacingBlock.attributes.description.draw_bottom=Whether to draw a small drop shadow below the block. May be a useful option if your resprite is transparent.
 
 
 
