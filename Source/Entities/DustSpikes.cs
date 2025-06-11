@@ -18,7 +18,7 @@ namespace FlaglinesAndSuch
 		"FlaglinesAndSuch/DustSpikesLeft = LoadLeft",
 		"FlaglinesAndSuch/DustSpikesRight = LoadRight"
 	)]
-	public class DustSpikes : Entity
+	public class DustSpikes : TriggerSpikes
 	{
 
 		public static Entity LoadUp(Level level, LevelData levelData, Vector2 offset, EntityData entityData)
@@ -31,13 +31,13 @@ namespace FlaglinesAndSuch
 			=> new DustSpikes(entityData, offset, Directions.Right);
 
 
-		public enum Directions
+		/*public enum Directions
 		{
 			Up,
 			Down,
 			Left,
 			Right
-		}
+		}*/
 
 		private struct SpikeInfo
 		{
@@ -154,7 +154,7 @@ namespace FlaglinesAndSuch
 		private int size;
 
 		public DustSpikes(Vector2 position, int size, Directions direction)
-			: base(position)
+			: base(position, size, direction)
 		{
 			this.size = size;
 			this.direction = direction;
