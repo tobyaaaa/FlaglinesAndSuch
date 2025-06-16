@@ -7,7 +7,7 @@ mods.FlaglinesAndSuch.name=Flaglines And Such
 
 entities.FlaglinesAndSuch/BlueBlock.placements.name.blueblocknormal=Dash State Block
 entities.FlaglinesAndSuch/BlueBlock.attributes.description.dashes=How many dashes the player should have for the block to be solid.\nWorks for any number, but visuals are not set for numbers above 2.
-
+entities.FlaglinesAndSuch/BlueBlock.attributes.description.overrideColors=A set of comma-seperated hex codes used to recolor the entity, if you wish. If less than 3 colors are present here, the entity will use its default colors.\nThe order of the colors is: The background color--The accent color while solid--The accent color while nonsolid.\ne.g., "ac3232,c8453c,b33a3a"\nOptionally, 3 more colors can be supplied, which can override colors usually inferred from the first three.\nThe 4th, 5th, and 6th colors control: The background color while nonsolid--The outline color while enabled--The outline color while nonsolid.
 
 
 

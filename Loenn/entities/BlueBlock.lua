@@ -23,7 +23,8 @@ BlueBlock.placements = {
         data = {
             width = 16,
             height = 16,
-            dashes = 0
+            dashes = 0,
+            overrideColors = ""
         }
     }
 }

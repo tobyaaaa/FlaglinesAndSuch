@@ -63,10 +63,10 @@ local flagLineOptions = {
 --local statueTexture = "objects/reflectionHeart/statue" -- temp sprite
 function TriangleFlagline.sprite(room, entity)
     --local sprite = drawableSprite.fromTexture(statueTexture, entity)
-    flagLineOptions.maxFlagHeight = entity.MaxFlagHeight
-    flagLineOptions.minFlagHeight = entity.MinFlagHeight
-    flagLineOptions.maxFlagLength = entity.MaxFlagLength
-    flagLineOptions.minFlagLength = entity.MinFlagLength
+    flagLineOptions.maxFlagHeight = 10
+    flagLineOptions.minFlagHeight = 10
+    flagLineOptions.maxFlagLength = 10
+    flagLineOptions.minFlagLength = 10
     
     if entity.MinSpacing <= 0 or entity.MaxSpacing <= 0 then
         flagLineOptions.minSpace = 1

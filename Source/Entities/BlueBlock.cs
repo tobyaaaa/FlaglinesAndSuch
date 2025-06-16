@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Celeste.ClutterBlock;
 
 namespace FlaglinesAndSuch
 {
@@ -70,7 +71,9 @@ namespace FlaglinesAndSuch
             SurfaceSoundIndex = 20;
             particleTexture = GFX.Game["particles/bubble"];
             dashes_to_activate = data.Int("dashes");
-            switch (dashes_to_activate) {
+
+            switch (dashes_to_activate)
+            {
                 default:
                     Collidable = false;
                     transitionTimer = 0f;
@@ -80,7 +83,7 @@ namespace FlaglinesAndSuch
                     insideColorDisabled = insideColor = Calc.HexToColor("ac3232");
                     bubbleColorDisabled = Calc.HexToColor("b33a3a");
 
-                    
+
                     Collidable = true;
                     transitionTimer = 1f;
                     break;
@@ -93,6 +96,24 @@ namespace FlaglinesAndSuch
                     transitionTimer = 0f;
                     break;
             }
+
+            if (data.Attr("overrideColors") != "")
+            {
+                string[] colorStrs = data.Attr("overrideColors").Replace(" ", String.Empty).Split(',');
+                if (colorStrs.Length >= 3)
+                {
+                    insideColor = Calc.HexToColor(colorStrs[0]);
+                    bubbleColor = Calc.HexToColor(colorStrs[1]);
+                    bubbleColorDisabled = Calc.HexToColor(colorStrs[2]);
+                    //optional
+                    insideColorDisabled = (colorStrs.Length > 3) ? Calc.HexToColor(colorStrs[3]) : Calc.HexToColor(colorStrs[0]);
+                    lineColor = (colorStrs.Length > 4) ? Calc.HexToColor(colorStrs[4]) : Calc.HexToColor("ffffff");
+                    lineColorDisabled = (colorStrs.Length > 5) ? Calc.HexToColor(colorStrs[5]) : Calc.HexToColor(colorStrs[1]);
+                }
+            }
+
+            
+
         }
 
         public override void Awake(Scene scene)

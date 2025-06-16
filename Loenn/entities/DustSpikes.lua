@@ -48,7 +48,7 @@ end
 local function createHandler(name, direction)
     local handler = {}
 
-    local horizontal = direction == "Left" or direction == "Right"
+    local horizontal = direction == "left" or direction == "right"
     local lengthKey = horizontal and "height" or "width"
 
     handler.name = name
