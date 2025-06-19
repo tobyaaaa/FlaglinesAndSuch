@@ -3,6 +3,7 @@ using Celeste.Mod;
 using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
+using MonoMod;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -153,7 +154,9 @@ namespace FlaglinesAndSuch
 
 		private int size;
 
-		public DustSpikes(Vector2 position, int size, Directions direction)
+
+
+        public DustSpikes(Vector2 position, int size, Directions direction)
 			: base(position, size, direction)
 		{
 			this.size = size;
@@ -190,12 +193,12 @@ namespace FlaglinesAndSuch
 					break;
 			}
 			Add(pc = new PlayerCollider(OnCollide));
-			Add(new StaticMover
+			/*Add(new StaticMover
 			{
 				OnShake = OnShake,
 				SolidChecker = IsRiding,
 				JumpThruChecker = IsRiding
-			});
+			});*/
 			Add(new DustEdge(RenderSpikes));
 			base.Depth = -50;
 
@@ -413,7 +416,7 @@ namespace FlaglinesAndSuch
 				
 			}
 		}
-
+		/*
 		private bool IsRiding(Solid solid)
 		{
 			switch (direction)
@@ -438,6 +441,6 @@ namespace FlaglinesAndSuch
 				return false;
 			}
 			return CollideCheck(jumpThru, Position + Vector2.UnitY);
-		}
+		}*/
 	}
 }
