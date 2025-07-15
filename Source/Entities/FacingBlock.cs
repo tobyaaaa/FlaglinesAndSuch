@@ -77,6 +77,7 @@ namespace FlaglinesAndSuch
 
         public FacingBlock(EntityData data, Vector2 offset) : base(data.Position + offset, data.Width, data.Height, safe: false)
         {
+            Collidable = false;//make waterfalls pass through
             SurfaceSoundIndex = data.Int("sound_index");
             facingLeft = data.Bool("left");
             trapPlayer = data.Bool("trap_player");
