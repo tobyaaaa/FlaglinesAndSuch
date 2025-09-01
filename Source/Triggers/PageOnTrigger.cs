@@ -38,7 +38,6 @@ namespace FlaglinesAndSuch
             [MethodImpl(MethodImplOptions.NoInlining)]
             public PoemPage(string imgPath, string txtPath, Vector2 cursorPos)//todo: custom image, dialog optional
             {
-                Console.WriteLine("FLaS: instantiated page/map trigger thing");
 
                 base.Tag = Tags.HUD;
 
@@ -57,7 +56,6 @@ namespace FlaglinesAndSuch
 
             public IEnumerator EaseIn()//todo: optionalize ease in rotation
             {
-                Console.WriteLine("FLaS: page/map trigger thing easein called");
 
                 Audio.Play("event:/game/03_resort/memo_in");
                 Vector2 vector = new Vector2(Engine.Width, Engine.Height) / 2f;
@@ -184,7 +182,6 @@ namespace FlaglinesAndSuch
         
         private IEnumerator Routine()
         {
-            Console.WriteLine("FLaS: page/map trigger thing routine started");
             active = true;
             player.StateMachine.State = 11;
             //player.StateMachine.Locked = true; //don't lock statemachine, I don't care if something knocks the player out of this. TODO: close map if something changes state
@@ -211,14 +208,12 @@ namespace FlaglinesAndSuch
             player.StateMachine.State = 0; //todo: can this happen just a hair earlier?
             poem = null;
             //EndCutscene(Level);
-            Console.WriteLine("FLaS: page/map trigger thing routine finished");
             active = false;
         }
 
         public override void OnEnter(Player player) //todo: interact option?
         {
 
-            Console.WriteLine("FLaS: page/map trigger thing OnEnter called");
 
             this.player = player; 
             if (!active && player.StateMachine.State == 0 && player.OnSafeGround) Add(new Coroutine(Routine()));
