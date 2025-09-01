@@ -31,7 +31,8 @@ namespace FlaglinesAndSuch
 
 		private Particle[] particles;
 
-		private VertexPositionColor[] verts;
+        private VertexPositionColor[] BGverts;
+        private VertexPositionColor[] verts;
 
 		public Color[] colors;
 	
@@ -66,7 +67,8 @@ namespace FlaglinesAndSuch
 
 			particleCount = Math.Abs(particlecount);
 			particles = new Particle[particleCount];
-			verts = new VertexPositionColor[(particleCount + 1) * 6];
+            BGverts = new VertexPositionColor[6];
+            verts = new VertexPositionColor[(particleCount) * 6]; //used to be particlecount + 1 but I've moved the background out
 
 
 			particlePosXmax = posxmax;
@@ -121,31 +123,39 @@ namespace FlaglinesAndSuch
 
 		public override void Render(Scene scene)
 		{
-			Vector2 position = (scene as Level).Camera.Position;
+			//int zoomoutCompatibleWidth = GameplayBuffers.Gameplay.Width + 64; //384f
+            //int zoomoutCompatibleHeight = GameplayBuffers.Gameplay.Height + 64; //244f
+
+			float zoomoutCompatibleWidthBG = GameplayBuffers.Gameplay.Width + 10;//330
+            float zoomoutCompatibleHeightBG = GameplayBuffers.Gameplay.Height + 10;//190
+
+            Vector2 position = (scene as Level).Camera.Position;//verts[0] through [5] is responsible for the background color
 			Color color = BGcolor * Alpha;
-			verts[0].Color = color;
-			verts[0].Position = new Vector3(-10f, -10f, 0f);
-			verts[1].Color = color;
-			verts[1].Position = new Vector3(330f, -10f, 0f);
-			verts[2].Color = color;
-			verts[2].Position = new Vector3(330f, 190f, 0f);
-			verts[3].Color = color;
-			verts[3].Position = new Vector3(-10f, -10f, 0f);
-			verts[4].Color = color;
-			verts[4].Position = new Vector3(330f, 190f, 0f);
-			verts[5].Color = color;
-			verts[5].Position = new Vector3(-10f, 190f, 0f);
+			BGverts[0].Color = color;
+			BGverts[0].Position = new Vector3(-10f, -10f, 0f);
+			BGverts[1].Color = color;
+			BGverts[1].Position = new Vector3(zoomoutCompatibleWidthBG, -10f, 0f);//330f
+            BGverts[2].Color = color;
+			BGverts[2].Position = new Vector3(zoomoutCompatibleWidthBG, zoomoutCompatibleHeightBG, 0f);//330f, 190f
+            BGverts[3].Color = color;
+			BGverts[3].Position = new Vector3(-10f, -10f, 0f);
+            BGverts[4].Color = color;
+            BGverts[4].Position = new Vector3(zoomoutCompatibleWidthBG, zoomoutCompatibleHeightBG, 0f);//330f, 190f
+            BGverts[5].Color = color;
+			BGverts[5].Position = new Vector3(-10f, zoomoutCompatibleHeightBG, 0f);//190f
+
+
 			for (int i = 0; i < particleCount; i++)
 			{
-				int num = (i + 1) * 6;
+				int num = (i) * 6;//used to be (i+1) * 6 but moved bg out
 				float scaleFactor = Calc.ClampedMap((particles[i].Speed * squishFactor), 0f, 1200f, 1f, 64f);
 				float scaleFactor2 = Calc.ClampedMap((particles[i].Speed * squishFactor), 0f, 1200f, 3f, 0.6f);
 				Vector2 direction = particles[i].Direction;
 				Vector2 value = direction.Perpendicular();
 				Vector2 position2 = particles[i].Position;
-				position2.X = -32f + Mod(position2.X - position.X * ScrollX, 384f);
-				position2.Y = -32f + Mod(position2.Y - position.Y * ScrollY, 244f);
-				Vector2 value2 = position2 - direction * scaleFactor * 0.5f - value * scaleFactor2;
+				position2.X = -32f + Mod(position2.X - position.X * ScrollX, 384f);//384f
+                position2.Y = -32f + Mod(position2.Y - position.Y * ScrollY, 244f);//244f
+                Vector2 value2 = position2 - direction * scaleFactor * 0.5f - value * scaleFactor2;
 				Vector2 value3 = position2 + direction * scaleFactor * 1f - value * scaleFactor2;
 				Vector2 value4 = position2 + direction * scaleFactor * 0.5f + value * scaleFactor2;
 				Vector2 value5 = position2 - direction * scaleFactor * 1f + value * scaleFactor2;
@@ -163,10 +173,27 @@ namespace FlaglinesAndSuch
 				verts[num + 5].Color = color2;
 				verts[num + 5].Position = new Vector3(value5, 0f);
 			}
-			GFX.DrawVertices(Matrix.Identity, verts, verts.Length);
-		}
+            //GFX.DrawVertices(Matrix.Identity, verts, verts.Length);
+            GFX.DrawVertices(Matrix.Identity, BGverts, BGverts.Length);
 
-		private float Mod(float x, float m)
+            for (int i = 0; i < GameplayBuffers.Gameplay.Width + 64; i += 384) {
+                for (int j = 0; j < GameplayBuffers.Gameplay.Height + 64; j += 244)
+                {
+					//note: drawing the entire set of vertices will obscure some details as the background gets drawn over old particles
+                    GFX.DrawVertices(Matrix.CreateTranslation(new Vector3(i, j, 0)), verts, verts.Length);
+                }
+            }
+			//GFX.DrawVertices(Matrix.CreateTranslation(new Vector3(384f, 0, 0)), verts, verts.Length);
+
+            //if zoomed out:
+            //for copies of 384 until gameplaywidth is covered:
+            //for copies of 244 until gameplayheight is covered:
+            //for each vert: translate it by i, j
+            //then draw all the verts (except 0 through 5) again
+            //(verts 0 thru 5 can be changed dynamically like in the nieve implementation)
+        }
+
+        private float Mod(float x, float m)
 		{
 			return (x % m + m) % m;
 		}

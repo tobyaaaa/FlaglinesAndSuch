@@ -8,6 +8,7 @@ using MonoMod.Utils;
 
 using Celeste;
 using Celeste.Mod;
+using Celeste.Mod.FlaglinesAndSuch;
 
 
 namespace FlaglinesAndSuch {
@@ -236,6 +237,9 @@ namespace FlaglinesAndSuch {
                     return result;
                 case "FlaglinesAndSuch/PolygonEffectCube":
                     result = new polygonEffect(child.AttrFloat("XPos"), child.AttrFloat("YPos"), child.AttrFloat("ZPos"), child.AttrFloat("Width"), child.AttrFloat("Height"), child.AttrFloat("Depth"), child.Attr("Colors"), child.AttrFloat("OffsetX"), child.AttrFloat("OffsetY"));
+                    return result;
+                case "FlaglinesAndSuch/RotParralaxTwo":
+                    result = new RotParralaxTwo(child);
                     return result;
 
             }
