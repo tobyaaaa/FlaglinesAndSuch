@@ -89,6 +89,10 @@ namespace FlaglinesAndSuch
                         if (liftSpeed.Y < 0.0 && Speed.Y < 0.0)
                             Speed.Y = 0.0f;
                     }
+
+                    //Position.Y = (float)Math.Ceiling(Position.Y); //attempt to prevent box from landing at a subpixel pos.
+                    //works a little, but not perfectly. boxes can still end up w/ subpixel pos. (try both...?)
+
                 }
                 else if (Hold.ShouldHaveGravity)
                 {
@@ -236,6 +240,9 @@ namespace FlaglinesAndSuch
 
         private void OnRelease(Vector2 force)
         {
+            //try resetting subpixels here
+            Position = Position.Round();
+            //
             stand.Collidable = true;
             RemoveTag((int)Tags.Persistent);
             stand.RemoveTag((int)Tags.Persistent);
@@ -311,6 +318,7 @@ namespace FlaglinesAndSuch
 
         public static void UnLoad()
         {
+
             On.Celeste.Actor.MoveHExact -= BoxMoveHExact;
             On.Celeste.Actor.MoveVExact -= BoxMoveVExact;
 
@@ -407,6 +415,7 @@ namespace FlaglinesAndSuch
                 box.Stand.Collidable = false;
                 bool result = orig(self, off);
                 box.Stand.Collidable = flag;
+
                 return result;
             }
 
@@ -516,10 +525,12 @@ namespace FlaglinesAndSuch
         {
             private static readonly Vector2 offset = new Vector2(-8f, -16f);
             private StandBox box;
+            public float DEBUG_IDENTIFIER;
             public StandBox Box => box;
             public BoxJumpThru(Vector2 position, int width, StandBox parent) : base(position + offset, width, false)
             {
                 box = parent;
+                DEBUG_IDENTIFIER = position.X;
             }
 
             public override void Awake(Scene scene)
@@ -531,11 +542,12 @@ namespace FlaglinesAndSuch
                 }
             }
 
-            public void SetPosition(Vector2 target)
+            public void SetPosition(Vector2 target) //only called while held I think
             {
                 Vector2 origPosition = Position;
                 Position = target + offset;
                 MoveStaticMovers(Position - origPosition);
+
             }
 
             public override void MoveHExact(int move)
@@ -550,6 +562,9 @@ namespace FlaglinesAndSuch
                 box.Collidable = false;
                 base.MoveVExact(move);
                 box.Collidable = true;
+
+
+                Console.WriteLine("standbox " + DEBUG_IDENTIFIER + " is at " + Position.X + ", " + Position.Y + "and" + (Position == box.Position));
             }
 
             public override void Removed(Scene scene)

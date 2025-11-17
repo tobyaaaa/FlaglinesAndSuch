@@ -267,8 +267,8 @@ namespace FlaglinesAndSuch
                 model = ObjModel.CreateFromStream(foundfile.Stream, filename);
                 Console.WriteLine("flaglines says: made the object!");
             }
-            else { Console.WriteLine("flaglines and such: 3d model could not be created!"); }
-            if (model is null) { Console.WriteLine("flaglines and such: 3d model was null after creation!"); }
+            //else { Console.WriteLine("flaglines and such: 3d model could not be created!"); }
+            //if (model is null) { Console.WriteLine("flaglines and such: 3d model was null after creation!"); }
             //Console.WriteLine("flaglines says: ow. Is object null? " + (model is null));
             //.CreateFromStream(asset.Stream, path)
 
@@ -280,8 +280,8 @@ namespace FlaglinesAndSuch
             //vertstextures = model.verts;
             //buffer = //VirtualContent.CreateRenderTarget("mountain-a", 1920, 1080, depth: true, preserve: false);
 
-            if (model is null) { Console.WriteLine("flaglines and such: 3d model was null at end of constructor!"); }
-            else { Console.WriteLine("flaglines and such: 3d model was FINE at end of constructor"); }
+            //if (model is null) { Console.WriteLine("flaglines and such: 3d model was null at end of constructor!"); }
+            //else { Console.WriteLine("flaglines and such: 3d model was FINE at end of constructor"); }
         }
         //load() 
         //
@@ -301,9 +301,9 @@ namespace FlaglinesAndSuch
             posMatrix = trans_matrix * base_matrix;
             //GFX.FxMountain.Parameters["WorldViewProj"].SetValue(Matrix.CreateTranslation(CoreWallPosition) * matrix3);
 
-            Console.WriteLine("flaglines and such: this statement gets printed once per update");
-            if (model is null) { Console.WriteLine("flaglines and such: 3d model was null at time of Update!"); }
-            else { Console.WriteLine("flaglines and such: 3d model was FINE at time of Update"); }
+            //Console.WriteLine("flaglines and such: this statement gets printed once per update");
+            //if (model is null) { Console.WriteLine("flaglines and such: 3d model was null at time of Update!"); }
+            //else { Console.WriteLine("flaglines and such: 3d model was FINE at time of Update"); }
         }
         public override void BeforeRender(Scene scene)
         {
@@ -336,7 +336,9 @@ namespace FlaglinesAndSuch
             if (!(model is null)) {
                 model.Draw(GFX.FxMountain);
             }
-            else { Console.WriteLine("flaglines and such: 3d model was null at time of BeforeRender!"); }
+            else { 
+                //Console.WriteLine("flaglines and such: 3d model was null at time of BeforeRender!"); 
+            }
         }
         public override void Render(Scene scene)
         {

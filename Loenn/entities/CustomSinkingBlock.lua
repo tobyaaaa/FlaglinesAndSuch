@@ -24,7 +24,8 @@ CustomSinkingBlock.placements = {
             HoldableSpeed = 0.0,
             Idle_time = 0.1,
             Accelerations = "",
-            no_bg_line = false
+            no_bg_line = false,
+            start_offset = 0
         }
     }
 }

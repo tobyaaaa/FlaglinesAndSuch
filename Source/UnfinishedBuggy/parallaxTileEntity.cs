@@ -18,11 +18,10 @@ namespace FlaglinesAndSuch
     {
         private char tileType;
 
-        private float width;
+        //private float width;
 
-        private float height;
+        //private float height;
 
-        private bool blendIn;
 
 		float scroll;
         //private Player playerentity;
@@ -30,16 +29,19 @@ namespace FlaglinesAndSuch
         private Vector2 RealPosition;
 		Vector2 PosOffset;
 
-        public parallaxTileEntity(Vector2 position, char tiletype, float width, float height, float Scroll, int offX, int offY)
+		/*
+		public parallaxTileEntity(Vector2 position, char tiletype, float width, float height, float Scroll, int offX, int offY)
 		: base(position, width, height, safe: true)
 		{
 			base.Depth = -12999;
 			this.width = width;
 			this.height = height;
-			this.blendIn = false;
 			tileType = tiletype;
 			SurfaceSoundIndex = SurfaceIndex.TileToIndex[tileType];
 			scroll = Scroll;
+
+
+
 			RealPosition = position;
             PosOffset = new Vector2(offX, offY);
         }
@@ -48,8 +50,30 @@ namespace FlaglinesAndSuch
 			: this(data.Position + offset, data.Char("tiletype", '3'), data.Width, data.Height, data.Float("scroll"), data.Int("offsetX"), data.Int("offsetY"))
 		{
 		}
+		*/
 
-		public override void Added(Scene scene)
+        public parallaxTileEntity(EntityData data, Vector2 offset, EntityID id) : base(data.Position + offset, data.Width, data.Height, true)
+        {
+            base.Depth = -12999;
+            //this.width = data.Width;
+            //this.height = data.Height;
+            tileType = data.Char("tiletype", '3');
+            SurfaceSoundIndex = SurfaceIndex.TileToIndex[tileType];
+            scroll = data.Float("scroll");
+
+			if (data.Has("anchoringMode") && data.Attr("anchoringMode") == "room origin")
+            {
+                Position -= offset;
+            }
+			else {
+
+			}
+
+            RealPosition = base.Position;
+            PosOffset = new Vector2(data.Int("offsetX"), data.Int("offsetY"));
+        }
+
+        public override void Added(Scene scene)
 		{
 			base.Added(scene);
 			//playerentity = base.Scene.Tracker.GetEntity<Player>();
@@ -59,14 +83,18 @@ namespace FlaglinesAndSuch
 		{
 			base.Awake(scene);
 			TileGrid tileGrid;
-			if (!blendIn)
+
+            tileGrid = GFX.FGAutotiler.GenerateBox(tileType, (int)Width / 8, (int)Height / 8).TileGrid;
+            Add(new LightOcclude());
+
+            /*if (!blendIn)
 			{
 				tileGrid = GFX.FGAutotiler.GenerateBox(tileType, (int)width / 8, (int)height / 8).TileGrid;
 				Add(new LightOcclude());
 			}
 			else
 			{
-				Level level = SceneAs<Level>();
+				Level level = SceneAs<Level>(); //blendin is stupid on this entity so no reason not to have this commented
 				Rectangle tileBounds = level.Session.MapData.TileBounds;
 				VirtualMap<char> solidsData = level.SolidsData;
 				int x = (int)(base.X / 8f) - tileBounds.Left;
@@ -76,8 +104,8 @@ namespace FlaglinesAndSuch
 				tileGrid = GFX.FGAutotiler.GenerateOverlay(tileType, x, y, tilesX, tilesY, solidsData).TileGrid;
 				Add(new EffectCutout());
 				base.Depth = -10501;
-			}
-			Add(tileGrid);
+			}*/
+            Add(tileGrid);
 			Add(new TileInterceptor(tileGrid, highPriority: true));
 			if (CollideCheck<Player>())
 			{

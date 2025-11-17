@@ -106,7 +106,7 @@ namespace FlaglinesAndSuch
 			{
 				Vector2 vector = particleDir;
 				Level level = scene as Level;
-				if (level.Bounds.Height > level.Bounds.Width)//get level bounds
+				if (level.Bounds.Height > level.Bounds.Width)//get level bounds for alt dirs
 				{
 					vector = particleDirB;
 				}

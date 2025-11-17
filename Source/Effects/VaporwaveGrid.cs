@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monocle;
 
+
+//GameplayBuffers.Gameplay.Width
+//GameplayBuffers.Gameplay.Height
+
 namespace FlaglinesAndSuch
 {
     class VaporwaveGrid : Backdrop

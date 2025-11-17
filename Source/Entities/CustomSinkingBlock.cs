@@ -43,7 +43,9 @@ namespace FlaglinesAndSuch
 		public float hasHoldableSpeed = 0f;
 		public bool noPlatformLine = false;
 
-		Vector2 endNode;
+        public float startOffset = 0;
+
+        Vector2 endNode;
 
 		private Scene scenew;
 
@@ -87,8 +89,9 @@ namespace FlaglinesAndSuch
 				}
 			}
 
+            startOffset = Math.Max(data.Float("start_offset"), 0);
 
-			MTexture mTexture = GFX.Game["objects/FlaglinesAndSuch/CustomSinkingBlock/" + OverrideTexture];
+            MTexture mTexture = GFX.Game["objects/FlaglinesAndSuch/CustomSinkingBlock/" + OverrideTexture];
 			nineSlice = new MTexture[4, 3];
 			for (int i = 0; i < 3; i++)
 			{
@@ -112,21 +115,28 @@ namespace FlaglinesAndSuch
 			orig_Added(scene);
 			areaData.WoodPlatform = woodPlatform;
 			scenew = scene;//if I don't do this, and instead just use Scene, the game crashes whenever I do base.Scene.Tracker
-		}
+            
+        }
+
+        public override void Awake(Scene scene)
+        {
+            base.Awake(scene);
+
+			//set position based on StartOffset
+			Vector2 oldPosition = ExactPosition;
+            Position = startPos + new Vector2(startOffset * (float)Math.Cos(angle), startOffset * (float)Math.Sin(angle));
+            if (isOverBounds() == 2)
+            {
+                Position = endNode;
+            }
+			MoveStaticMovers(ExactPosition - oldPosition);
+        }
 
 
-
-		public override void Update()
+        public override void Update()
 		{
 			base.Update();
 
-
-			/**if (Scene == null)
-			{ Console.WriteLine("welp, beans"); }
-			else {
-				if (Scene.Tracker == null)
-				{ Console.WriteLine("welp, beans 2"); }
-			}*/
 
 
 			Player playerRider = null;

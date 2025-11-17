@@ -71,7 +71,7 @@ entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.HoldableS
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Idle_time=How long, after the player leaves the platform, should the platform use Idle Speed.
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Accelerations=Comma seperated list of six numbers, representing Unpressed, Idle, Pressed, Crouched, Looking-up, and Holdable accelerations in that order. Defaults to 400,600,400,400,400,400.\nBest left to default values in most cases.
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.no_bg_line=Whether to render the linking line between the platform's start and end.
-
+entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.start_offset=Allows the platform to be partway along the rail at room load. Measured in pixels from the primary placement; values "out of bounds" will be clamped.
 
 entities.FlaglinesAndSuch/CustomSinkingBlock.placements.name.customsinkingblock=Custom Sinking Block
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.texture=The texture of the platform; uses the same pathing as normal sinking platforms.
@@ -84,6 +84,7 @@ entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.HoldableSpee
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Idle_time=How long, after the player leaves the platform, should the platform use Idle Speed.
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Accelerations=Comma seperated list of six numbers, representing Unpressed, Idle, Pressed, Crouched, Looking-up, and Holdable accelerations in that order.\nDefaults to 400,600,400,400,400,400.\nBest left to default values in most cases.
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.no_bg_line=Whether to render the linking line between the platform's start and end.
+entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.start_offset=Allows the block to be partway along the rail at room load. Measured in pixels from the primary placement; values "out of bounds" will be clamped.
 
 
 entities.FlaglinesAndSuch/CustomWhiteBlock.placements.name.normal=Custom White Block

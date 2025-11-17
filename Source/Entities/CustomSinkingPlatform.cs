@@ -41,6 +41,8 @@ namespace FlaglinesAndSuch
 		public float hasHoldableSpeed = 0f;
 		public bool noPlatformLine = false;
 
+		public float startOffset = 0;
+
 		Vector2 endNode;
 		//need to add endNode.X somewhere and replace current refs to "position" and "endNode.Y" with refs to different variables;
 		//Should determine on entity creation whether position or endNode is lower down and use that
@@ -67,13 +69,13 @@ namespace FlaglinesAndSuch
 
 			lookUpSpeed = data.Float("Look_up_speed");
 			hasHoldableSpeed = data.Float("HoldableSpeed");
-			//maxDist = data.Float("Max_pos"); data.Nodes[0].Y
 			endNode = data.Nodes[0]+ offset;
 			startPos = new Vector2(base.X, base.Y);
 			angle = (float) Math.Atan2(Math.Abs(endNode.Y - startPos.Y), Math.Abs(endNode.X - startPos.X));
-			//Console.WriteLine("FlaglinesAndSuch log: platform: " + endNode.X + " " + endNode.Y + " " + startPos.X + " " + startPos.Y);
 
 			OverrideTexture = data.Attr("texture");
+
+			startOffset = Math.Max(data.Float("start_offset"),0);
 
 			String Accelstrs = data.Attr("Accelerations");
 			if (Accelstrs != "")
@@ -84,9 +86,12 @@ namespace FlaglinesAndSuch
 					Accelerations[i] = float.Parse(Accelstrs2[i]);
 				}
 			}
-		}
 
-		public override void Added(Scene scene)
+
+
+        }
+
+        public override void Added(Scene scene)
 		{
 			AreaData areaData = AreaData.Get(scene);
 			string woodPlatform = areaData.WoodPlatform;
@@ -96,9 +101,24 @@ namespace FlaglinesAndSuch
 			}
 			orig_Added(scene);
 			areaData.WoodPlatform = woodPlatform;
-		}
 
-		public override void Render()//all visual of course
+        }
+        public override void Awake(Scene scene)
+        {
+            base.Awake(scene);
+
+            //set position based on StartOffset
+            Vector2 oldPosition = ExactPosition;
+            Position = startPos + new Vector2(startOffset * (float)Math.Cos(angle), startOffset * (float)Math.Sin(angle));
+            if (isOverBounds() == 2)
+            {
+                Position = endNode;
+            }
+            MoveStaticMovers(ExactPosition - oldPosition);
+        }
+
+
+        public override void Render()//all visual of course
 		{
 
 			Vector2 value = shaker.Value;
@@ -121,7 +141,7 @@ namespace FlaglinesAndSuch
 			{
 				if (riseTimer <= 0f)
 				{
-					if (/*base.ExactPosition.Y <= startY*/platBoundsCheck >= 1)
+					if (platBoundsCheck >= 1)
 					{
 						Audio.Play("event:/game/03_resort/platform_vert_start", Position);
 					}
@@ -151,11 +171,11 @@ namespace FlaglinesAndSuch
 				speed = Calc.Approach(speed, upSpeed, Accelerations[0] * Engine.DeltaTime);//move up? //400f
 			}
 
-			if ((speed > 0 && /*base.ExactPosition.Y >= endNode.Y*/platBoundsCheck <= -1) || (speed < 0f && /*base.ExactPosition.Y <= startY */platBoundsCheck >= 1)) {
+			if ((speed > 0 && platBoundsCheck <= -1) || (speed < 0f && platBoundsCheck >= 1)) {
 				speed = 0;
 			}
 
-			if (speed > 0f && /*(base.ExactPosition.Y < endNode.Y)*/platBoundsCheck > -1)
+			if (speed > 0f && platBoundsCheck > -1)
 			{
 				if (!downSfx.Playing)
 				{
@@ -170,7 +190,7 @@ namespace FlaglinesAndSuch
 				MoveTowardsY(endNode.Y, (speed) * Engine.DeltaTime * (float)Math.Sin(angle));//notably uses Y only
 				MoveTowardsX(endNode.X, (speed) * Engine.DeltaTime * (float)Math.Cos(angle));
 				platBoundsCheck = isOverBounds(); //must recalculate this value as it still thinks the platform is back where it was before movement
-				if (/*base.ExactPosition.Y >= endNode.Y*/platBoundsCheck <= -1)//notably uses Y only
+				if (platBoundsCheck <= -1)//notably uses Y only
 				{
 					downSfx.Stop();
 					Audio.Play("event:/game/03_resort/platform_vert_end", Position);
@@ -178,7 +198,7 @@ namespace FlaglinesAndSuch
 				}
 
 			}
-			else if (speed < 0f && /*base.ExactPosition.Y > startY*/ platBoundsCheck < 1)//notably uses Y only
+			else if (speed < 0f && platBoundsCheck < 1)//notably uses Y only
 			{
 				if (!upSfx.Playing)
 				{
@@ -191,7 +211,7 @@ namespace FlaglinesAndSuch
 				MoveTowardsY(startPos.Y, (0f - speed) * Engine.DeltaTime * (float)Math.Sin(angle));//notably uses Y only
 				MoveTowardsX(startPos.X, (0f - speed) * Engine.DeltaTime * (float)Math.Cos(angle));
 				platBoundsCheck = isOverBounds(); //must recalculate this value as it still thinks the platform is back where it was before movement
-				if (/*base.ExactPosition.Y <= startY */platBoundsCheck >= 1)//notably uses Y only
+				if (platBoundsCheck >= 1)//notably uses Y only
 				{
 					upSfx.Stop();
 					Audio.Play("event:/game/03_resort/platform_vert_end", Position);
@@ -215,45 +235,6 @@ namespace FlaglinesAndSuch
 			if (OverBot.Length() == StartToEnd.Length()) { return -1; }
 			if (OverBot.Length() > StartToEnd.Length()) { return -2; }
 			return 0;
-			/*if (angle == 0f || angle == Math.PI)
-			{
-				if (base.ExactPosition.Length() * Math.Cos(angle) >= startPos.Length() * Math.Cos(angle))
-				{
-					return 2;
-				}
-				if (base.ExactPosition.Length() * Math.Cos(angle) == startPos.Length() * Math.Cos(angle))
-				{
-					return 1;
-				}
-				if (base.ExactPosition.Length() * Math.Cos(angle) <= endNode.Length() * Math.Cos(angle))
-				{
-					return -2;
-				}
-				if (base.ExactPosition.Length() * Math.Cos(angle) == endNode.Length() * Math.Cos(angle))
-				{
-					return -1;
-				}
-			}
-			else
-			{
-				if (base.ExactPosition.Length() * Math.Sin(angle) >= startPos.Length() * Math.Sin(angle))
-				{
-					return 2;
-				}
-				if (base.ExactPosition.Length() * Math.Cos(angle) == startPos.Length() * Math.Cos(angle))
-				{
-					return 1;
-				}
-				if (base.ExactPosition.Length() * Math.Sin(angle) <= endNode.Length() * Math.Sin(angle))
-				{
-					return -2;
-				}
-				if (base.ExactPosition.Length() * Math.Cos(angle) == endNode.Length() * Math.Cos(angle))
-				{
-					return -1;
-				}
-			}
-			return 0;*/
 		}
 		public void orig_Added(Scene scene)//this is all visuals
 		{
