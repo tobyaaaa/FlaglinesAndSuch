@@ -265,7 +265,7 @@ namespace FlaglinesAndSuch
             ModAsset foundfile;
             if (Everest.Content.TryGet(filename, out foundfile)) {
                 model = ObjModel.CreateFromStream(foundfile.Stream, filename);
-                Console.WriteLine("flaglines says: made the object!");
+                //Console.WriteLine("flaglines says: made the object!");
             }
             //else { Console.WriteLine("flaglines and such: 3d model could not be created!"); }
             //if (model is null) { Console.WriteLine("flaglines and such: 3d model was null after creation!"); }

@@ -134,6 +134,17 @@ entities.FlaglinesAndSuch/PlatformJelly.attributes.description.bigHitbox= If ena
 
 
 
+entities.FlaglinesAndSuch/parallaxTileEntity.placements.name.ptileentitynormal=Parallax Tile entity
+
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.scroll=The entity's motion relative to the camera's. 1.0 = static relative to world; 0.0 = static relative to camera.
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.offsetX=
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.offsetY=
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.anchoringMode=Whether the entity will be positioned based such that (0,0) is relative to the room, or the world.\nEntities with scroll set to 0, placed at a location relative to (0,0) will appear at that location relative to the camera.\nEntities with a scroll value between 1 and 0 will appear between that position and their location in the editor.
+
+
+
+
+
 
 entities.FlaglinesAndSuch/Sawblade.placements.name.normal=Sawblade
 

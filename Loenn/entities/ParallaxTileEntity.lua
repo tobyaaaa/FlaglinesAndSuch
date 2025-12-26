@@ -7,12 +7,13 @@ local connectedEntities = require("helpers.connected_entities")
 local parallaxTileEntity = {}
 
 parallaxTileEntity.name = "FlaglinesAndSuch/parallaxTileEntity"
-parallaxTileEntity.warnBelowSize = {16, 16}
-
-parallaxTileEntity.fillColor = {0.169, 0.533, 0.851}
-parallaxTileEntity.borderColor = {0.267, 0.718, 1.0}
+parallaxTileEntity.warnBelowSize = {8, 8}
 
 parallaxTileEntity.fieldInformation = {
+    tiletype = {
+        options = fakeTilesHelper.getTilesOptions(),
+        editable = false
+    },
     offsetX = {
         fieldType = "integer"
     },
@@ -20,7 +21,7 @@ parallaxTileEntity.fieldInformation = {
         fieldType = "integer"
     },
     anchoringMode = {
-        options = { "room origin","room center", "map origin" },
+        options = { "room origin", "map origin" },
         editable = false
     },
 }
@@ -39,8 +40,5 @@ parallaxTileEntity.placements = {
     }
 }
 
-
-parallaxTileEntity.sprite = fakeTilesHelper.getEntitySpriteFunction("tileType", false, "tilesFg", {1.0, 1.0, 1.0, 0.7})
-parallaxTileEntity.fieldInformation = fakeTilesHelper.getFieldInformation("tileType")
-
+parallaxTileEntity.sprite = fakeTilesHelper.getEntitySpriteFunction("tiletype", false, "tilesFg", {1.0, 1.0, 1.0, 0.7})
 return parallaxTileEntity
