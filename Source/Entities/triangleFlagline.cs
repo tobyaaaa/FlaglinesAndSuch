@@ -1,6 +1,7 @@
 ﻿using Celeste;
 using Celeste.Mod;
 using Celeste.Mod.Entities;
+using Celeste.Mod.Helpers;
 using Microsoft.Xna.Framework;
 using Monocle;
 using System;
@@ -140,14 +141,38 @@ namespace FlaglinesAndSuch
 				base.Update();
 			}
 
-			public override void Render()
+            private bool IsVisible(SimpleCurve curve)
+            {
+                Cloth[] clothes = this.clothes;
+                float maxHeight = 0f;
+                for (int i = 0; i < clothes.Length; i++)
+                {
+                    Cloth cloth = clothes[i];
+                    float h = cloth.Height + (cloth.Length * ClothDroopAmount * 1.4f);
+
+                    if (h > maxHeight)
+                    {
+                        maxHeight = h;
+                    }
+                }
+
+                return CullHelper.IsCurveVisible(curve, maxHeight + 8f);
+            }
+
+            public override void Render()
 			{
-				Vector2 vector = (From.X < To.X) ? From : To;
+
+                Vector2 vector = (From.X < To.X) ? From : To;
 				Vector2 vector2 = (From.X < To.X) ? To : From;
 				float num = (vector - vector2).Length();
 				float num2 = num / 8f;
 				SimpleCurve simpleCurve = new SimpleCurve(vector, vector2, (vector2 + vector) / 2f + Vector2.UnitY * (num2 + (float)Math.Sin(waveTimer) * num2 * 0.3f));
-				Vector2 vector3 = vector;
+
+
+                if (!IsVisible(simpleCurve))
+                    return;
+
+                Vector2 vector3 = vector;
 				Vector2 vector4 = vector;
 				float num3 = 0f;
 				int num4 = 0;
