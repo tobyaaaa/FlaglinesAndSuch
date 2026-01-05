@@ -35,6 +35,7 @@ namespace FlaglinesAndSuch
 		float randFreq = 0.25f;
 
 		bool disableOnPhotosensitive;
+		bool fadeInOnEntry;
 
 		public BonfireLight(EntityData data, Vector2 offset) : base(data.Position + offset)
 		{
@@ -58,25 +59,38 @@ namespace FlaglinesAndSuch
 
 				disableOnPhotosensitive = data.Bool("photosensitivityConcern");
 			}
+			fadeInOnEntry = !data.Has("fadeIn") || data.Bool("fadeIn"); //if FadeIn isn't there (back-compat), it's always true
 
-			lightColor = Calc.HexToColor(data.Attr("lightColor"));
+            lightColor = Calc.HexToColor(data.Attr("lightColor"));
 			base.Tag = Tags.TransitionUpdate;
 
 			Add(light = new VertexLight(new Vector2(0f, 0f), lightColor, 1, lfadestart, lfadeend/*1f, 32, 64*/));
 			Add(bloom = new BloomPoint(new Vector2(0f, 0f), 1f, bloomradius));
 			Add(wiggle = Wiggler.Create(wiggleD, wiggleF, delegate (float wigglerVar)
 			{
-				light.Alpha = (bloom.Alpha = Math.Min(1f, brightness + wigglerVar * 0.25f) * multiplier);
+				light.Alpha = bloom.Alpha = Math.Min(1f, brightness + wigglerVar * 0.25f) * multiplier;
 			}));
 		}
 
-		public override void Update()
+        public override void Awake(Scene scene)
+        {
+            base.Awake(scene);
+            if ((disableOnPhotosensitive && Settings.Instance.DisableFlashes ) || randFreq <= 0)
+			{
+				return;
+			}
+			if (fadeInOnEntry) {
+                wiggle.Start();
+            }
+        }
+
+        public override void Update()
 		{
 			if (disableOnPhotosensitive && Settings.Instance.DisableFlashes) {
 				base.Update();
 				return;
 			}
-			multiplier = Calc.Approach(multiplier, 1f, Engine.DeltaTime * 2f);
+			multiplier = fadeInOnEntry ? Calc.Approach(multiplier, 1f, Engine.DeltaTime * 2f) : 1f;
 				if (base.Scene.OnInterval(randFreq))
 				{
 					brightness = randBase + Calc.Random.NextFloat(randAdd);//0.5, 0.5

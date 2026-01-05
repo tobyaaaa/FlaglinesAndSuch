@@ -13,8 +13,17 @@ entities.FlaglinesAndSuch/BlueBlock.attributes.description.overrideColors=A set 
 
 entities.FlaglinesAndSuch/BonfireLight.placements.name.normal=Flickering Light
 
-#entities.FlaglinesAndSuch/BonfireLight.attributes.description.
-#TODO
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.lightColor=The Color of the light.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.lightFadeStart=With LightFadeEnd, specifies how far away from the center the light should fade off.\nThe difference between these two settings affects how soft or hard the light's shadow feels.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.lightFadeEnd=With LightFadeStart, specifies how far away from the center the light should fade off.\nThe light will be at its full brightness until this distance away from the center.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.bloomRadius=The size of the light's Bloom Point. Set to 0 for a "duller" light. I find values similar to LightFadeStart usually work well.\nLarge values can cause the bloom point to noticeably pop in/out during room transitions, as bloom points aren't blocked by tiles.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.baseBrightness=This value + BrightnessVariance is the maximum brightness of the light; this value - BrightnessVariance is the minimum. (Totals above 1/below 0 are still full brightness/off)
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.brightnessVariance=How far from the BaseBrightness this light is able to stray.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.flashFrequency=This is how many seconds between each time the brightness changes.\nyes this is technically a period, not a frequency. No I'm not changing it at this point.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.wigglerDuration=The wiggler is a sine-wave alteration to the brightness of the light, on top of the existing randomness, reset each time the BrightnessVariance changes.\nThis controls the frequency of that sine wave.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.wigglerFrequency=The wiggler is a sine-wave alteration to the brightness of the light, on top of the existing randomness, reset each time the BrightnessVariance changes.\nThis controls the how long the sine wave affects the light for, each time that happens.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.photosensitivityConcern=If set to true, the light will maintain its BaseBrightness (not flickering) if Photosensitive Mode is on.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.fadeIn=If set to true, the light will be off when the room is loaded, then quickly fade in. Mirrors vanilla's "bonfire" entity behavior.
 
 
 

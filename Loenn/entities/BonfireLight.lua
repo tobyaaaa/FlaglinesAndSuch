@@ -31,7 +31,8 @@ BonfireLight.placements = {
             flashFrequency = 0.25,
             wigglerDuration = 4.0,
             wigglerFrequency = 0.2,
-            photosensitivityConcern = false
+            photosensitivityConcern = false,
+            fadeIn = false
         }
     }
 }
