@@ -23,7 +23,9 @@ namespace FlaglinesAndSuch
         //private float height;
 
 
-		float scroll;
+		//float scroll;
+		float scrollX;
+		float scrollY;
         //private Player playerentity;
         //private Vector2 lastposition;
         private Vector2 RealPosition;
@@ -59,7 +61,16 @@ namespace FlaglinesAndSuch
             //this.height = data.Height;
             tileType = data.Char("tiletype", '3');
             SurfaceSoundIndex = SurfaceIndex.TileToIndex[tileType];
-            scroll = data.Float("scroll");
+			//scroll = data.Float("scroll");
+			if (data.Has("scroll"))
+			{
+				scrollX = scrollY = data.Float("scroll");
+			}
+			else {
+                scrollX = data.Float("scrollX");
+                scrollY = data.Float("scrollY");
+            }
+
 
 			if (data.Has("anchoringMode") && data.Attr("anchoringMode") == "room origin")
             {
@@ -128,10 +139,13 @@ namespace FlaglinesAndSuch
 
 
 
-			Vector2 RenderSpot = RealPosition - ((level.Camera.Position - PosOffset) * (scroll - 1)) ;// + Offset; also do 1-scroll
-            //Vector2 RenderSpot = new Vector2(RealPosition.X * scroll + (160f * (1 - scroll)), RealPosition.Y * scroll + (90f * (1 - scroll)));
-            //RenderSpot = new Vector2(RenderSpot.X - level.Camera.Position.X * scroll, RenderSpot.Y - level.Camera.Position.Y * scroll);
-			//position = RenderSpot;
+			//Vector2 RenderSpot = RealPosition - ((level.Camera.Position - PosOffset) * (scroll - 1)) ;// + Offset; also do 1-scroll
+																									    //Vector2 RenderSpot = new Vector2(RealPosition.X * scroll + (160f * (1 - scroll)), RealPosition.Y * scroll + (90f * (1 - scroll)));
+																									    //RenderSpot = new Vector2(RenderSpot.X - level.Camera.Position.X * scroll, RenderSpot.Y - level.Camera.Position.Y * scroll);
+																								   	    //position = RenderSpot;
+
+
+			Vector2 RenderSpot = RealPosition - new Vector2((level.Camera.Position.X - PosOffset.X) * (scrollX - 1), (level.Camera.Position.Y - PosOffset.Y) * (scrollY - 1));
 			MoveTo(RenderSpot);
 
             //Position += PosDiff * scroll;

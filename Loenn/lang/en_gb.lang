@@ -146,8 +146,10 @@ entities.FlaglinesAndSuch/PlatformJelly.attributes.description.bigHitbox= If ena
 entities.FlaglinesAndSuch/parallaxTileEntity.placements.name.ptileentitynormal=Parallax Tile entity
 
 entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.scroll=The entity's motion relative to the camera's. 1.0 = static relative to world; 0.0 = static relative to camera.
-entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.offsetX=
-entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.offsetY=
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.scrollX=The entity's motion relative to the camera's, horizontally. 1.0 = static relative to world; 0.0 = static relative to camera.
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.scrollY=The entity's motion relative to the camera's, vertically. 1.0 = static relative to world; 0.0 = static relative to camera.
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.offsetX=This is a way to offset the block that isn't subject to the repositioning via the camera-it could be useful if the scroll is low enough that the block won't budge.
+entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.offsetY=This is a way to offset the block that isn't subject to the repositioning via the camera-it could be useful if the scroll is low enough that the block won't budge.
 entities.FlaglinesAndSuch/parallaxTileEntity.attributes.description.anchoringMode=Whether the entity will be positioned based such that (0,0) is relative to the room, or the world.\nEntities with scroll set to 0, placed at a location relative to (0,0) will appear at that location relative to the camera.\nEntities with a scroll value between 1 and 0 will appear between that position and their location in the editor.
 
 
