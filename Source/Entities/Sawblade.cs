@@ -214,9 +214,13 @@ namespace FlaglinesAndSuch
 
         public void kelper_nail_hit(Player player, Vector2 nailDir)
         {
+            //Console.WriteLine("flas nail: A");
             KelperImports.ConsumeNailSwing();
+            //Console.WriteLine("flas nail: B");
             KelperImports.ApplyNailRebound(1);
+            //Console.WriteLine("flas nail: C");
             KelperImports.PlayNailTinkSound();
+            //Console.WriteLine("flas nail: D");
         }
     }
 }
