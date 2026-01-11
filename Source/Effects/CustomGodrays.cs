@@ -125,7 +125,7 @@ namespace FlaglinesAndSuch
 				float num3 = -32f + Mod(rays[i].Y - level.Camera.Y * scrollY, 244f);
 				float width = rays[i].Width;
 				float length = rays[i].Length;
-				Vector2 value3 = new Vector2((int)num2, (int)num3);
+				Vector2 value3 = Calc.Floor(new Vector2(num2, num3));
 				Color color = Color.Lerp(rayColor, rayColorFade, percent) * Ease.CubeInOut(Calc.Clamp(((percent < 0.5f) ? percent : (1f - percent)) * 2f, 0f, 1f)) * fade;
 				if (entity != null)
 				{
