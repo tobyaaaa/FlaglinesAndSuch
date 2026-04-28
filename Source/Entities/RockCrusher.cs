@@ -27,7 +27,7 @@ namespace FlaglinesAndSuch
 
         public RockCrusher(EntityData data, Vector2 offset) : base(data.Position + offset) {
 
-            base.Collider = new Circle(10f);
+            base.Collider = new Hitbox(20, 16, -10, -8); //new Circle(10f);
             Add(new PlayerCollider(OnPlayer));
             Add(shakingSfx = new SoundSource());
             rockTexture = GFX.Game["objects/FlaglinesAndSuch/RockCrusher/rock"];
@@ -112,7 +112,8 @@ namespace FlaglinesAndSuch
             while (dist != 0)
             {
                 Position.Y += 1;
-
+                
+                //dash block special case
                 foreach (DashBlock dblock in base.Scene.Tracker.GetEntities<DashBlock>())
                 {
                     if (CollideCheck(dblock, Position + Vector2.UnitY))
@@ -120,13 +121,17 @@ namespace FlaglinesAndSuch
                         dblock.Break(base.Center, Vector2.UnitY, true, true);
                         SceneAs<Level>().Shake(0.2f);
                         Input.Rumble(RumbleStrength.Medium, RumbleLength.Medium);
-                        //break this entity
                         return true;
                     }
                 }
-
+                //generic Solid collision
                 platform = CollideFirst<Solid>(Position + Vector2.UnitY);
                 if (platform != null)
+                {
+                    return true;
+                }
+                SolidTiles solid = CollideFirst<SolidTiles>(Position + Vector2.UnitY);
+                if (solid != null)
                 {
                     return true;
                 }

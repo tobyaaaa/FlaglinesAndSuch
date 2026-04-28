@@ -13,6 +13,7 @@ using System.Reflection;
 namespace FlaglinesAndSuch
 {
     [CustomEntity("FlaglinesAndSuch/StandBox")]
+    [Tracked(false)]
     public class StandBox : Actor
     {
         public Vector2 Speed;
@@ -25,6 +26,11 @@ namespace FlaglinesAndSuch
         private Vector2 prevLiftSpeed;
         private BoxJumpThru stand;
         public BoxJumpThru Stand => stand;
+        /// <summary>
+        /// Controls whether the box should be prevented from respawning if one is in the player's hand, like Theo
+        /// </summary>
+        private bool noTransitionRespawn;
+        private bool diesToBarriers;
 
         public StandBox(EntityData e, Vector2 offset)
             : base(e.Position + offset)
@@ -46,12 +52,28 @@ namespace FlaglinesAndSuch
             onCollideV = OnCollideV;
             LiftSpeedGraceTime = 0.1f;
             Add(new MirrorReflection());
+
+            noTransitionRespawn = e.Bool("noTransitionDoubling");
+            diesToBarriers = e.Bool("diesToBarriers");
         }
 
         public override void Added(Scene scene)
         {
             base.Added(scene);
             Level = SceneAs<Level>();
+
+            if (noTransitionRespawn) {
+                foreach (StandBox entity in Level.Tracker.GetEntities<StandBox>())
+                {
+                    if (entity != this && entity.SourceId.ID == this.SourceId.ID && entity.Hold.IsHeld)
+                    {
+                        //I think this doesn't play because the entity gets removed too fast. Oh well!
+                        Audio.Play("event:/new_content/game/10_farewell/glider_emancipate", Position);
+                        RemoveSelf();
+                    }
+                }
+            }
+
             stand = new BoxJumpThru(Position, 16, this);
             Scene.Add(stand);
         }
@@ -59,7 +81,32 @@ namespace FlaglinesAndSuch
         public override void Update()
         {
             base.Update();
-            Depth = 100;
+
+            if (diesToBarriers)
+            {
+                foreach (SeekerBarrier entity in base.Scene.Tracker.GetEntities<SeekerBarrier>())
+                {
+                    //is this really how seeker barriers work? that's hilarious
+                    entity.Collidable = true;
+                    bool collided = CollideCheck(entity);
+                    entity.Collidable = false;
+                    if (collided)
+                    {
+                        Collidable = false;
+                        if (Hold.IsHeld)
+                        {
+                            Vector2 speed2 = Hold.Holder.Speed;
+                            Hold.Holder.Drop();
+                            Input.Rumble(RumbleStrength.Medium, RumbleLength.Medium);
+                        }
+                        Destroy();
+                        return;
+                    }
+                }
+            }
+
+
+                Depth = 100;
             if (Hold.IsHeld)
             {
                 prevLiftSpeed = Vector2.Zero;
@@ -562,9 +609,6 @@ namespace FlaglinesAndSuch
                 box.Collidable = false;
                 base.MoveVExact(move);
                 box.Collidable = true;
-
-
-                Console.WriteLine("standbox " + DEBUG_IDENTIFIER + " is at " + Position.X + ", " + Position.Y + "and" + (Position == box.Position));
             }
 
             public override void Removed(Scene scene)

@@ -41,7 +41,8 @@ effect.defaultData = {
     speed_y = 8.0,
     ray_count = 6,
     angle_x = -1.67079639,
-    angle_y = 1.0
+    angle_y = 1.0,
+    extend_bounds = false
 }
 
 return effect

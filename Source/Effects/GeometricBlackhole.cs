@@ -109,6 +109,7 @@ namespace FlaglinesAndSuch
             {
                 Vector2 vector = new Vector2(buffer.Width, buffer.Height) / 2f;
                 Draw.SpriteBatch.Draw((RenderTarget2D)buffer, vector, buffer.Bounds, Color.White * FadeAlphaMultiplier, 0f, vector, 1f, SpriteEffects.None, 0f);
+                
             }
         }
     }

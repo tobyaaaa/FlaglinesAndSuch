@@ -20,16 +20,16 @@ entities.FlaglinesAndSuch/BonfireLight.attributes.description.bloomRadius=The si
 entities.FlaglinesAndSuch/BonfireLight.attributes.description.baseBrightness=This value + BrightnessVariance is the maximum brightness of the light; this value - BrightnessVariance is the minimum. (Totals above 1/below 0 are still full brightness/off)
 entities.FlaglinesAndSuch/BonfireLight.attributes.description.brightnessVariance=How far from the BaseBrightness this light is able to stray.
 entities.FlaglinesAndSuch/BonfireLight.attributes.description.flashFrequency=This is how many seconds between each time the brightness changes.\nyes this is technically a period, not a frequency. No I'm not changing it at this point.
-entities.FlaglinesAndSuch/BonfireLight.attributes.description.wigglerDuration=The wiggler is a sine-wave alteration to the brightness of the light, on top of the existing randomness, reset each time the BrightnessVariance changes.\nThis controls the frequency of that sine wave.
-entities.FlaglinesAndSuch/BonfireLight.attributes.description.wigglerFrequency=The wiggler is a sine-wave alteration to the brightness of the light, on top of the existing randomness, reset each time the BrightnessVariance changes.\nThis controls the how long the sine wave affects the light for, each time that happens.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.wigglerDuration=The wiggler is a sine-wave alteration to the brightness of the light, on top of the existing randomness, reset each time the BrightnessVariance changes.\nThis controls how long the sine wave affects the light for, each time that happens.
+entities.FlaglinesAndSuch/BonfireLight.attributes.description.wigglerFrequency=The wiggler is a sine-wave alteration to the brightness of the light, on top of the existing randomness, reset each time the BrightnessVariance changes.\nThis controls the frequency of that sine wave.
 entities.FlaglinesAndSuch/BonfireLight.attributes.description.photosensitivityConcern=If set to true, the light will maintain its BaseBrightness (not flickering) if Photosensitive Mode is on.
 entities.FlaglinesAndSuch/BonfireLight.attributes.description.fadeIn=If set to true, the light will be off when the room is loaded, then quickly fade in. Mirrors vanilla's "bonfire" entity behavior.
 
 
 
 
-entities.FlaglinesAndSuch/CustomCloud.placements.name.fragile=Custom Cloud (fragile)
-entities.FlaglinesAndSuch/CustomCloud.placements.name.normal=Custom Cloud
+entities.FlaglinesAndSuch/CustomCloud.placements.name.fragile=Cloud (Reskinnable, fragile)
+entities.FlaglinesAndSuch/CustomCloud.placements.name.normal=Cloud (Reskinnable)
 
 entities.FlaglinesAndSuch/CustomCloud.attributes.description.fragile=Whether the cloud should be fragile.
 entities.FlaglinesAndSuch/CustomCloud.attributes.description.small=Whether the cloud should be small.
@@ -40,7 +40,7 @@ entities.FlaglinesAndSuch/CustomCloud.attributes.description.OverrideSprite=The 
 
 
 
-entities.FlaglinesAndSuch/CustomFlagline.placements.name.sohelpme=Custom Flagline
+entities.FlaglinesAndSuch/CustomFlagline.placements.name.sohelpme=Flagline (Custom)
 
 entities.FlaglinesAndSuch/CustomFlagline.attributes.description.FlagColors=The colors of the flags, randomized.
 entities.FlaglinesAndSuch/CustomFlagline.attributes.description.WireColor=The color of the wire.
@@ -57,7 +57,7 @@ entities.FlaglinesAndSuch/CustomFlagline.attributes.description.Depth=The depth 
 
 
 
-entities.FlaglinesAndSuch/CustomReflectionStatue.placements.name.statue=Custom Reflection Statue
+entities.FlaglinesAndSuch/CustomReflectionStatue.placements.name.statue=Reflection Statue (Custom)
 
 entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.fake_heart=whether completing the codes should spawn a fake heart.
 entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.base_code=The base code, used for the gem colors.
@@ -69,7 +69,7 @@ entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.Override
 
 
 
-entities.FlaglinesAndSuch/CustomSinkingPlatform.placements.name.customsinkingplatform=Custom Sinking Platform
+entities.FlaglinesAndSuch/CustomSinkingPlatform.placements.name.customsinkingplatform=Sinking Platform (Custom)
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.texture=The texture of the platform; uses the same pathing as normal sinking platforms.
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Crouching_speed=How fast the platform moves if the player riding it is crouching. Negative values go towards the starting point.
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Pressed_speed=How fast the platform moves with a player on it. Negative values go towards the starting point.
@@ -82,7 +82,7 @@ entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Accelerat
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.no_bg_line=Whether to render the linking line between the platform's start and end.
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.start_offset=Allows the platform to be partway along the rail at room load. Measured in pixels from the primary placement; values "out of bounds" will be clamped.
 
-entities.FlaglinesAndSuch/CustomSinkingBlock.placements.name.customsinkingblock=Custom Sinking Block
+entities.FlaglinesAndSuch/CustomSinkingBlock.placements.name.customsinkingblock=Sinking Block
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.texture=The texture of the platform; uses the same pathing as normal sinking platforms.
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Crouching_speed=How fast the platform moves if the player riding it is crouching. Negative values go towards the starting point.
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.Pressed_speed=How fast the platform moves with a player on it. Negative values go towards the starting point.
@@ -96,7 +96,7 @@ entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.no_bg_line=W
 entities.FlaglinesAndSuch/CustomSinkingBlock.attributes.description.start_offset=Allows the block to be partway along the rail at room load. Measured in pixels from the primary placement; values "out of bounds" will be clamped.
 
 
-entities.FlaglinesAndSuch/CustomWhiteBlock.placements.name.normal=Custom White Block
+entities.FlaglinesAndSuch/CustomWhiteBlock.placements.name.normal=White Block (Custom)
 
 entities.FlaglinesAndSuch/CustomWhiteBlock.attributes.description.hold_time=How long the player needs to stay crouched on the block to fall through.
 entities.FlaglinesAndSuch/CustomWhiteBlock.attributes.description.sound_index=What sound the block should make when stepped on.
@@ -179,6 +179,9 @@ entities.FlaglinesAndSuch/ShootingEye.placements.name.ShootingEye=Shooting Eye (
 entities.FlaglinesAndSuch/BloomedOshiro.placements.name.BloomedOshiro=Bloomed Oshiro (FLCC/kunogi)
 
 entities.FlaglinesAndSuch/StandBox.placements.name.StandBox=Stand Box (FLCC/kunogi)
+entities.FlaglinesAndSuch/StandBox.attributes.description.noTransitionDoubling=Whether the box should NOT respawn, if the player enters the room carrying the same Stand Box.\nDetermined via Entity ID, duplicate entity IDs will cause weird behavior
+entities.FlaglinesAndSuch/StandBox.attributes.description.diesToBarriers=Whether the box is destroyed by Seeker Barriers.
+
 
 entities.FlaglinesAndSuch/ShyGhost.placements.name.ShyGhost=Shy Ghost (FLCC/kunogi)
 
@@ -375,3 +378,13 @@ style.effects.FlaglinesAndSuch/PolygonEffectCube.description.Width=The width of 
 style.effects.FlaglinesAndSuch/PolygonEffectCube.description.Height=The height of the cube.\nNote, if your cube is at depth X and you want the cube to APPEAR Y pixels tall, you'll want to put Y/X into this spot.
 style.effects.FlaglinesAndSuch/PolygonEffectCube.description.Depth=How deep the cube is.\nNote that since depth isn't linear, two cubes with the same depth values at different ZPos's will have different actual depth.\nAlso, refrain from having depth greater than Zpos; if you want a cube to extend into negative scroll, use two seperate cubes instead.
 style.effects.FlaglinesAndSuch/PolygonEffectCube.description.colors=A list of colors for each face of the cube (front>top>bot>left>right).\nIf this list is less than 5, the last color will be used for the remaining faces.
+
+
+style.effects.FlaglinesAndSuch/RotParralaxTwo.name=Rotating Parallax+
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.texture=The texture to use, just like normal Parallax bgs.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.rotationSpeed=How fast the styleground rotates.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.alpha=The transparency of the styleground.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.scale=Scale the styleground up or down by this factor.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.originX=The center of rotation for the styleground, in pixels from the top-left corner.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.originY=The center of rotation for the styleground, in pixels from the top-left corner.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.initialRotation=An offset in degrees to apply when loading. Useful if multiple of this effect are used around the same centerpoint.

@@ -25,7 +25,7 @@ namespace FlaglinesAndSuch
 		private MTexture pinTexture;
 		private MTexture[,] nineSlice;
 
-		private Shaker shaker;
+		//private Shaker shaker;
 
 		private SoundSource downSfx;
 
@@ -53,12 +53,13 @@ namespace FlaglinesAndSuch
 
 		public CustomSinkingBlock(EntityData data, Vector2 offset) : base(data.Position + offset, data.Width, data.Height, false)
 		{
-			base.Depth = 1;
+			base.Depth = -9999;
 			base.Collider = new Hitbox(data.Width, data.Height, 0, 0);
 			SurfaceSoundIndex = 15;
-			Add(shaker = new Shaker(on: false));
-			//Add(new LightOcclude());
-			Add(downSfx = new SoundSource());
+            StartShaking(0.1f);
+            //Add(shaker = new Shaker(on: false));
+            //Add(new LightOcclude());
+            Add(downSfx = new SoundSource());
 			Add(upSfx = new SoundSource());
 
 			noPlatformLine = data.Bool("no_bg_line");
@@ -163,8 +164,9 @@ namespace FlaglinesAndSuch
 					{
 						Audio.Play("event:/game/03_resort/platform_vert_start", Position);
 					}
-					shaker.ShakeFor(0.15f, removeOnFinish: false);
-				}
+                    StartShaking(0.1f);
+                    //shaker.ShakeFor(0.15f, removeOnFinish: false);
+                }
 				riseTimer = IdleTimer;
 				if ((float)Input.MoveY.Value == -1 && HasPlayerOnTop())
 				{
@@ -214,8 +216,9 @@ namespace FlaglinesAndSuch
 				{
 					downSfx.Stop();
 					Audio.Play("event:/game/03_resort/platform_vert_end", Position);
-					shaker.ShakeFor(0.1f, removeOnFinish: false);
-				}
+                    StartShaking(0.1f);
+                    //shaker.ShakeFor(0.1f, removeOnFinish: false);
+                }
 
 			}
 			else if (speed < 0f && /*base.ExactPosition.Y > startY*/ platBoundsCheck < 1)//notably uses Y only
@@ -235,7 +238,8 @@ namespace FlaglinesAndSuch
 				{
 					upSfx.Stop();
 					Audio.Play("event:/game/03_resort/platform_vert_end", Position);
-					shaker.ShakeFor(0.1f, removeOnFinish: false);
+                    StartShaking(0.1f);
+                    //shaker.ShakeFor(0.1f, removeOnFinish: false);
 				}
 			}
 			else
@@ -281,30 +285,33 @@ namespace FlaglinesAndSuch
 		}
 		public override void Render()//all visual of course
 		{
-			Vector2 value = shaker.Value;
-            /*textures[0].Draw(Position + value);
+			Vector2 realPos = Position;
+			Position += base.Shake;
+            
+			/*textures[0].Draw(Position);
 			for (int i = 8; (float)i < base.Width - 8f; i += 8)
 			{
-				textures[1].Draw(Position + value + new Vector2(i, 0f));
+				textures[1].Draw(Position + new Vector2(i, 0f));
 			}
-			textures[3].Draw(Position + value + new Vector2(base.Width - 8f, 0f));
-			textures[2].Draw(Position + value + new Vector2(base.Width / 2f - 4f, 0f));
+			textures[3].Draw(Position + new Vector2(base.Width - 8f, 0f));
+			textures[2].Draw(Position + new Vector2(base.Width / 2f - 4f, 0f));
 			*/
             float num = Width / 8f - 1f;
 			float num2 = Height / 8f - 1f;
-			for (int i = 0; (float)i <= num; i++)
+			for (int i = 0; i <= num; i++)
 			{
-				for (int j = 0; (float)j <= num2; j++)
+				for (int j = 0; j <= num2; j++)
 				{
-					int num3 = ((float)i < num) ? Math.Min(i, 1) : 2;
-					int num4 = ((float)j < num2) ? Math.Min(j, 1) : 2;
-					nineSlice[num3, num4].Draw(Position + value + new Vector2(i* 8, j* 8), Vector2.Zero);
+					int num3 = (i < num) ? Math.Min(i, 1) : 2;
+					int num4 = (j < num2) ? Math.Min(j, 1) : 2;
+					nineSlice[num3, num4].Draw(Position + new Vector2(i* 8, j* 8), Vector2.Zero);
 				}
             }
-            pinTexture.Draw(Position + value + new Vector2(base.Width / 2f - 4f, 0f));
+            pinTexture.Draw(Position + new Vector2(base.Width / 2f - 4f, 0f));
 
             base.Render();
-		}
+			Position = realPos;
+        }
 
 		public bool HasRiderButLikeWhy()//because of the scenew thing
 		{

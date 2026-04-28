@@ -77,7 +77,7 @@ namespace FlaglinesAndSuch
 			}
 			else
 			{
-				Add(sprite = Class1.spriteBank.Create("MiniTouchSwitch"));
+				//Add(sprite = Class1.spriteBank.Create("MiniTouchSwitch")); //commented to depollute logs
 			}
 			base.Collider = new Hitbox(16f, 16f, -8f, -8f);
             Add(follower = new Follower(id));

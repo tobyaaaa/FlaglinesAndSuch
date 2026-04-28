@@ -35,7 +35,7 @@ namespace FlaglinesAndSuch
         }
 
 
-        private Sprite sprite;
+        //private Sprite sprite;
         private Level Level;
 
         public static ParticleType P_RBarrelParticle;//??
@@ -64,10 +64,10 @@ namespace FlaglinesAndSuch
         float WindDivider = 400f; //how much less of an effect wind should have. Don't set to one. DEFINITELY don't set to 0.
 
         public RocketBarrel(EntityData data, Vector2 offset) : base(data.Position + offset) {
-            Add(sprite = Class1.spriteBank.Create("RBarrel"));
+            //Add(sprite = Class1.spriteBank.Create("RBarrel")); //commented to depollute logs
             Add(shaker = new Shaker(on: false));
             Add(new PlayerCollider(OnPlayer));
-            sprite.Play("idle");
+            //sprite.Play("idle");
             base.Collider = new Hitbox(16f, 14f, -8f, -6f);
             OnCollideVert = CollisionV;
             OnCollideHorz = CollisionH;
@@ -141,7 +141,7 @@ namespace FlaglinesAndSuch
                 stun_timer -= Engine.DeltaTime;
             }
             //rotate sprite and do particles
-            sprite.Rotation = (float)(Math.Atan((double)((vert_velocity + wind_add.Y) / 2.0f))+ (Math.PI / 2)); // + (Math.Sin(Engine.DeltaTime / 2.0)) ) 
+            //sprite.Rotation = (float)(Math.Atan((double)((vert_velocity + wind_add.Y) / 2.0f))+ (Math.PI / 2)); // + (Math.Sin(Engine.DeltaTime / 2.0)) ) 
             if (Scene.OnInterval(0.02f))
             {
                 (Scene as Level).ParticlesBG.Emit(P_RBarrelParticle, 2, barrel_rider.Center + new Vector2(0f, 5f), new Vector2(3f, 3f), Color.Lerp(Color.Gray, Color.Black, Calc.Random.NextFloat(0.2f)));
@@ -277,7 +277,7 @@ namespace FlaglinesAndSuch
                     {
 
                         barrel_state = barrel_states.Active;
-                        sprite.Play("startup");
+                        //sprite.Play("startup");
                         vert_velocity = SpeedMaxUp * 1.5f;
 
                         //yield break;

@@ -8,7 +8,8 @@ effect.canForeground = true
 effect.defaultData = {
     texture = "",
     alpha = 1.0,
-    scale = 1.0,
+    scaleX = 1.0,
+    scaleY = 1.0,
     fadeIn = false,
 
     x = 0.0,

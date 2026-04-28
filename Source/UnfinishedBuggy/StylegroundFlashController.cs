@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 namespace FlaglinesAndSuch
 {
     [CustomEntity("FlaglinesAndSuch/StylegroundFlashController")]
+    [Tracked(false)]
     class StylegroundFlashController : Entity
     {
         String TagID;
@@ -32,6 +33,7 @@ namespace FlaglinesAndSuch
         private struct thisBackdrop {
             public Backdrop drop;
             public Color dropColor;
+            public bool inUse;
         }
         List<thisBackdrop> TheseBackdrops;
 
@@ -52,9 +54,20 @@ namespace FlaglinesAndSuch
 
         public override void Awake(Scene scene)
         {
-            base.Awake(scene);
-            Level level = base.Scene as Level;
+            Level level = SceneAs<Level>();
+            foreach (StylegroundFlashController entity in level.Tracker.GetEntities<StylegroundFlashController>())
+            {
+                if (entity != this && entity.TagID == this.TagID)
+                {
+                    //when a new controller with the same Tag setting is loaded, it updates the old one instead of allowing two to exist
+                    CopyOverSettings(entity);
+                    RemoveSelf();
+                }
+            }
+            AddTag(Tags.Global); //prevents stylegrounds from having their basic color set wrongly on respawns
 
+
+            base.Awake(scene);
             List<Backdrop>  tempList = new List<Backdrop>();//this whole little block is to poulate the backdrop list
             tempList.AddRange(level.Background.GetEach<Backdrop>(TagID));
             for (int i = 0; i < tempList.Count; i++)
@@ -62,6 +75,7 @@ namespace FlaglinesAndSuch
                 thisBackdrop tempBackdrop;
                 tempBackdrop.drop = tempList[i];
                 tempBackdrop.dropColor = tempList[i].Color;
+                tempBackdrop.inUse = false;
                 TheseBackdrops.Add(tempBackdrop);
             }
 
@@ -91,7 +105,7 @@ namespace FlaglinesAndSuch
                     else
                     {
                         TheseBackdrops.Shuffle();
-                        this.Add(new Coroutine(ColorPulse(TheseBackdrops.ElementAt<thisBackdrop>(0).drop, PulseColor)));
+                        this.Add(new Coroutine(ColorPulse(TheseBackdrops.ElementAt<thisBackdrop>(0), PulseColor)));
                     }
 
                     delay = PauseBase + Calc.Random.NextFloat(PauseAdd);
@@ -105,7 +119,7 @@ namespace FlaglinesAndSuch
 
                     foreach (thisBackdrop item in TheseBackdrops)
                     {
-                        this.Add(new Coroutine(ColorPulse(item.drop, PulseColor)));
+                        this.Add(new Coroutine(ColorPulse(item, PulseColor)));
                         yield return RippleDelay;
                     }
 
@@ -114,7 +128,7 @@ namespace FlaglinesAndSuch
 
                     for (int index = TheseBackdrops.Count() - 1; index >= 0; index--)
                     {
-                        this.Add(new Coroutine(ColorPulse(TheseBackdrops.ElementAt<thisBackdrop>(index).drop, PulseColor)));
+                        this.Add(new Coroutine(ColorPulse(TheseBackdrops.ElementAt<thisBackdrop>(index), PulseColor)));
                         yield return RippleDelay;
 
                     }
@@ -125,7 +139,7 @@ namespace FlaglinesAndSuch
                     TheseBackdrops.Shuffle();
                     foreach (thisBackdrop item in TheseBackdrops)
                     {
-                        this.Add(new Coroutine(ColorPulse(item.drop, PulseColor)));
+                        this.Add(new Coroutine(ColorPulse(item, PulseColor)));
                         yield return RippleDelay;
                     }
                     break;
@@ -133,7 +147,7 @@ namespace FlaglinesAndSuch
                 default:
                     foreach (thisBackdrop item in TheseBackdrops)
                     {
-                        this.Add(new Coroutine(ColorPulse(item.drop, PulseColor)));
+                        this.Add(new Coroutine(ColorPulse(item, PulseColor)));
                     }
 
                     break;
@@ -141,9 +155,16 @@ namespace FlaglinesAndSuch
             yield break;
         }
 
-        private IEnumerator ColorPulse(Backdrop backdrop, Color newColor /*float fadeInTime, float fadeOutTime*/)
+        private IEnumerator ColorPulse(thisBackdrop thisbackdrop, Color newColor /*float fadeInTime, float fadeOutTime*/)
         {
-            Color oldColor = backdrop.Color;
+            if (thisbackdrop.inUse)
+            {
+                //we do not want multiple coroutines on one styleground at once
+                yield return null;
+            }
+            thisbackdrop.inUse = true;
+
+            Color oldColor = thisbackdrop.dropColor;
             if (newColor == oldColor)
             {
                 yield break;
@@ -163,7 +184,7 @@ namespace FlaglinesAndSuch
                 {
                     Percent -= (Engine.DeltaTime / fadeOutTime);
                 }
-                backdrop.Color = Color.Lerp(oldColor, newColor, Percent);
+                thisbackdrop.drop.Color = Color.Lerp(oldColor, newColor, Percent);
 
                 if (Percent >= 1.0)
                 {
@@ -175,12 +196,22 @@ namespace FlaglinesAndSuch
                 {
                     yield break;
                 }
+
+                thisbackdrop.inUse = false;
                 yield return null;
             }
         }
 
 
-
+        void CopyOverSettings(StylegroundFlashController other) {
+            other.fadeInTime = this.fadeInTime;
+            other.fadeOutTime = this.fadeOutTime;
+            other.PulseColor = PulseColor;
+            other.pulseDiff = this.pulseDiff;
+            other.PauseBase = this.PauseBase;
+            other.PauseAdd = this.PauseAdd;
+            other.RippleDelay = this.RippleDelay;
+        }
 
 
 

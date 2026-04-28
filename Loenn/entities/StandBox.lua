@@ -8,7 +8,11 @@ StandBox.name = "FlaglinesAndSuch/StandBox"
 StandBox.texture = "objects/FlaglinesAndSuch/standbox/idle00"
 StandBox.placements = {
     {
-        name = "StandBox"
+        name = "StandBox",
+        data = {
+            noTransitionDoubling = false,
+            diesToBarriers = false
+        }
     }
 }
 

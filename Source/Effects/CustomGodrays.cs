@@ -29,15 +29,17 @@ namespace FlaglinesAndSuch
 
 			public float Length;
 
-			public void Reset(int minwidth, int maxwidth, int minlength, int maxlength, float durationbase, float durationadd)
+			public void Reset(int minwidth, int maxwidth, int minlength, int maxlength, float durationbase, float durationadd, bool extbound)
 			{
 				Percent = 0f;
-				X = Calc.Random.NextFloat(384f);
-				Y = Calc.Random.NextFloat(244f);
-				Duration = Math.Abs(durationbase + Calc.Random.NextFloat() * durationadd);
+                Duration = Math.Abs(durationbase + Calc.Random.NextFloat() * durationadd);
 				Width = Calc.Random.Next(minwidth, maxwidth);
 				Length = Calc.Random.Next(minlength, maxlength);
-			}
+
+
+                X = Calc.Random.NextFloat(384f + (extbound ? Width * 2 : 0));
+                Y = Calc.Random.NextFloat(244f + (extbound ? Length * 2 : 0));
+            }
 		}
 		public int minWidth;
 		public int maxWidth;
@@ -57,6 +59,8 @@ namespace FlaglinesAndSuch
 
 		public int RayCount = 6;
 
+		bool extendedBounds;
+
 		private VertexPositionColor[] vertices;
 
 		private int vertexCount;
@@ -67,7 +71,7 @@ namespace FlaglinesAndSuch
 
 		private float fade;
 
-		public CustomGodrays(int minwidth, int maxwidth, int minlength, int maxlength, float durationbase, float durationadd, float raycoloralpha, String raycolor, String raycolorfade, float scrollx, float scrolly, float speedx, float speedy, int raycount, float anglex, float angley)
+		public CustomGodrays(int minwidth, int maxwidth, int minlength, int maxlength, float durationbase, float durationadd, float raycoloralpha, String raycolor, String raycolorfade, float scrollx, float scrolly, float speedx, float speedy, int raycount, float anglex, float angley, bool extendbounds)
 		{
 			maxWidth = maxwidth;
 			minWidth = Math.Min(minwidth, maxwidth);
@@ -89,13 +93,14 @@ namespace FlaglinesAndSuch
 			rays = new Ray[RayCount];
 			vertices = new VertexPositionColor[6*RayCount];
 
-			UseSpritebatch = false;
+            extendedBounds = extendbounds;
+            UseSpritebatch = false;
 			for (int i = 0; i < rays.Length; i++)
 			{
-				rays[i].Reset(minWidth, maxWidth, minLength, maxLength, durationBase, durationAdd);
+                rays[i].Reset(minWidth, maxWidth, minLength, maxLength, durationBase, durationAdd, extendedBounds);
 				rays[i].Percent = Calc.Random.NextFloat();
 			}
-		}
+        }
 
 		public override void Update(Scene scene)
 		{
@@ -107,29 +112,39 @@ namespace FlaglinesAndSuch
 			{
 				return;
 			}
-			Player entity = level.Tracker.GetEntity<Player>();
+			Player player = level.Tracker.GetEntity<Player>();
 			Vector2 value = Calc.AngleToVector(angleX, angleY);
 			Vector2 value2 = new Vector2(0f - value.Y, value.X);
 			int num = 0;
 			for (int i = 0; i < rays.Length; i++)
-			{
-				if (rays[i].Percent >= 1f)
+            {
+                float width = rays[i].Width;
+                float length = rays[i].Length;
+
+                float Xmodrange = 384f + (extendedBounds ? width * 2 : 0);
+                float Ymodrange = 244f + (extendedBounds ? length * 2 : 0);
+                float Xadd = extendedBounds ? -width : -32;
+                float Yadd = extendedBounds ? -length : -32;
+
+
+                if (rays[i].Percent >= 1f)
 				{
-					rays[i].Reset(minWidth, maxWidth, minLength, maxLength, durationBase, durationAdd);
+					rays[i].Reset(minWidth, maxWidth, minLength, maxLength, durationBase, durationAdd, extendedBounds);
 				}
 				rays[i].Percent += Engine.DeltaTime / rays[i].Duration;
 				rays[i].Y += speedY * Engine.DeltaTime;
 				rays[i].X += speedX * Engine.DeltaTime;
 				float percent = rays[i].Percent;
-				float num2 = -32f + Mod(rays[i].X - level.Camera.X * scrollX, 384f);
-				float num3 = -32f + Mod(rays[i].Y - level.Camera.Y * scrollY, 244f);
-				float width = rays[i].Width;
-				float length = rays[i].Length;
+
+
+                float num2 = Xadd + Mod(rays[i].X - level.Camera.X * scrollX, Xmodrange);
+				float num3 = Yadd + Mod(rays[i].Y - level.Camera.Y * scrollY, Ymodrange);
+
 				Vector2 value3 = Calc.Floor(new Vector2(num2, num3));
 				Color color = Color.Lerp(rayColor, rayColorFade, percent) * Ease.CubeInOut(Calc.Clamp(((percent < 0.5f) ? percent : (1f - percent)) * 2f, 0f, 1f)) * fade;
-				if (entity != null)
+				if (player != null)
 				{
-					float num4 = (value3 + level.Camera.Position - entity.Position).Length();
+					float num4 = (value3 + level.Camera.Position - player.Position).Length();
 					if (num4 < 64f)
 					{
 						color *= 0.25f + 0.75f * (num4 / 64f);
