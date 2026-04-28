@@ -307,6 +307,7 @@ style.effects.FlaglinesAndSuch/customGodrays.description.speed_y=How fast the go
 style.effects.FlaglinesAndSuch/customGodrays.description.ray_count=How many godrays there are.
 style.effects.FlaglinesAndSuch/customGodrays.description.angle_x=The x component specifying the angle of the sides of the godrays.
 style.effects.FlaglinesAndSuch/customGodrays.description.angle_y=The y component specifying the angle of the sides of the godrays.
+style.effects.FlaglinesAndSuch/customGodrays.description.extend_bounds=enabling this prevents godrays from 'popping' out of view at the edges of the screen (it's very visible with big godrays).\n It does this by increasing the space where godrays can appear, so rays will more often be offscreen.\n You might want to increase Ray Count to compensate!
 
 #custom dreamstars
 style.effects.FlaglinesAndSuch/customDreamStars.name=Dreamstars (custom)
@@ -385,6 +386,8 @@ style.effects.FlaglinesAndSuch/RotParralaxTwo.description.texture=The texture to
 style.effects.FlaglinesAndSuch/RotParralaxTwo.description.rotationSpeed=How fast the styleground rotates.
 style.effects.FlaglinesAndSuch/RotParralaxTwo.description.alpha=The transparency of the styleground.
 style.effects.FlaglinesAndSuch/RotParralaxTwo.description.scale=Scale the styleground up or down by this factor.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.scaleX=Scale the styleground horizontally by this factor.
+style.effects.FlaglinesAndSuch/RotParralaxTwo.description.scaleY=Scale the styleground vertically by this factor.
 style.effects.FlaglinesAndSuch/RotParralaxTwo.description.originX=The center of rotation for the styleground, in pixels from the top-left corner.
 style.effects.FlaglinesAndSuch/RotParralaxTwo.description.originY=The center of rotation for the styleground, in pixels from the top-left corner.
 style.effects.FlaglinesAndSuch/RotParralaxTwo.description.initialRotation=An offset in degrees to apply when loading. Useful if multiple of this effect are used around the same centerpoint.
