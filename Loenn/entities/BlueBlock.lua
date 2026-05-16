@@ -15,7 +15,17 @@ BlueBlock.borderColor = {0.267, 0.718, 1.0}
 BlueBlock.fieldInformation = {
     dashes = {
         fieldType = "integer"
+    },
+    FlagColors = {
+        fieldType = "list",
+        minimumElements = 0,
+        elementDefault = "ffffff",
+        elementOptions = {
+            fieldType = "color",
+            allowXNAColors = false
+        }
     }
+        
 }
 BlueBlock.placements = {
     {

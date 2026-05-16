@@ -22,6 +22,15 @@ effect.fieldInformation = {
     },
     pos_y_max = {
         fieldType = "integer"
+    },
+    particle_colors = {
+        fieldType = "list",
+        minimumElements = 1,
+        elementDefault = "ffffff",
+        elementOptions = {
+            fieldType = "color",
+            allowXNAColors = false
+        }
     }
 }
 

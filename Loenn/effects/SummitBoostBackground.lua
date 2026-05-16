@@ -19,6 +19,15 @@ effect.fieldInformation = {
     },
     cloud_count = {
         fieldType = "integer"
+    },
+    streak_colors = {
+        fieldType = "list",
+        minimumElements = 1,
+        elementDefault = "ffffff",
+        elementOptions = {
+            fieldType = "color",
+            allowXNAColors = false
+        }
     }
 }
 

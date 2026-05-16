@@ -35,6 +35,15 @@ CustomFlagline.fieldInformation = {
     },
     Depth = {
         fieldType = "integer"
+    },
+    FlagColors = {
+        fieldType = "list",
+        minimumElements = 1,
+        elementDefault = "ffffff",
+        elementOptions = {
+            fieldType = "color",
+            allowXNAColors = false
+        }
     }
 }
 CustomFlagline.placements = {

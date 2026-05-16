@@ -50,7 +50,7 @@ namespace Celeste.Mod.FlaglinesAndSuch
             base.Render();
             for (int i = 0; i < Nodes.Count - 1; i++) {
                 Draw.Line(Nodes[i], Nodes[i+1], Color.Gold);
-                Draw.Line(Nodes[i], Nodes[i] + (Normals[i] * 8), Color.Red);
+                Draw.Line(Nodes[i], Nodes[i] + (Normals[i] * 8), Color.Green);
 
             }
         }

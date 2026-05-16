@@ -123,6 +123,12 @@ entities.FlaglinesAndSuch/FacingBlock.attributes.description.draw_bottom=Whether
 
 
 
+entities.FlaglinesAndSuch/HoneyWall.placements.name.honeywallL=Honey Wall (L)
+entities.FlaglinesAndSuch/HoneyWall.placements.name.honeywallR=Honey Wall (R)
+
+
+
+
 entities.FlaglinesAndSuch/tminusHazardFlagController.placements.name.HazardFlagController=Hazard Flag Controller
 entities.FlaglinesAndSuch/tminusHazardFlagController.attributes.description.setFlag=The flag to be set.
 entities.FlaglinesAndSuch/tminusHazardFlagController.attributes.description.eventFlags=The "events" corresponding to each list of flags.
