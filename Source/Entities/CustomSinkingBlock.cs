@@ -56,6 +56,9 @@ namespace FlaglinesAndSuch
 			base.Depth = -9999;
 			base.Collider = new Hitbox(data.Width, data.Height, 0, 0);
 			SurfaceSoundIndex = 15; //data.Int("soundIndex");
+			if (data.Has("soundIndex")) {
+                SurfaceSoundIndex = data.Int("soundIndex");
+            }
             StartShaking(0.1f);
             //Add(shaker = new Shaker(on: false));
             //Add(new LightOcclude());

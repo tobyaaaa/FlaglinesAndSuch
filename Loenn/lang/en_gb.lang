@@ -69,6 +69,15 @@ entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.Override
 
 
 
+entities.FlaglinesAndSuch/RockCrusher.placements.name.rockcrusher=Rock Crusher
+
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.flag=If left empty, the rock will fall when Madeline is close. Otherwise, it will fall when this flag is enabled.
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.permanent=Whether the rock should not respawn, even if the player dies or changes rooms.
+entities.FlaglinesAndSuch/CustomReflectionStatue.attributes.description.texture=The rock's texture image, relative to Graphics/Atlases/Gameplay/objects/FlaglinesAndSuch/RockCrusher/
+
+
+
+
 entities.FlaglinesAndSuch/CustomSinkingPlatform.placements.name.customsinkingplatform=Sinking Platform (Custom)
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.texture=The texture of the platform; uses the same pathing as normal sinking platforms.
 entities.FlaglinesAndSuch/CustomSinkingPlatform.attributes.description.Crouching_speed=How fast the platform moves if the player riding it is crouching. Negative values go towards the starting point.

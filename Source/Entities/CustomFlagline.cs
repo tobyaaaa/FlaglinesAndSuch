@@ -56,7 +56,7 @@ namespace FlaglinesAndSuch
 			flagDroopAmount = data.Float("FlagDroopAmount");
 			entitydepth = data.Int("Depth", 8999);//8999
 
-			minHeight = Math.Min(minHeight, maxHeight);//assorted crash prevention
+            minHeight = Math.Min(minHeight, maxHeight);//assorted crash prevention
 			minLength = Math.Min(minLength, maxLength);
 			minSpacing = Math.Min(minSpacing, maxSpacing);
 

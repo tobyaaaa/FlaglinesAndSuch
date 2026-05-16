@@ -12,13 +12,15 @@ RockCrusher.placements = {
     {
         name = "rockcrusher",
         data = {
-
+            flag = "",
+            permanent = false,
+            texture = "rock"
         }
     }
 }
 
 function RockCrusher.sprite(room, entity)
-    local texture = "objects/FlaglinesAndSuch/Sawblade/small00"
+    local texture = "objects/FlaglinesAndSuch/RockCrusher/rock"
     local sprite = drawableSpriteStruct.fromTexture(texture, entity)
     return sprite
 end

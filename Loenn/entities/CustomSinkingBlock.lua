@@ -25,7 +25,8 @@ CustomSinkingBlock.placements = {
             Idle_time = 0.1,
             Accelerations = "",
             no_bg_line = false,
-            start_offset = 0
+            start_offset = 0,
+            soundIndex = 15
         }
     }
 }

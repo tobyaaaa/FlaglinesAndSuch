@@ -28,8 +28,10 @@ namespace FlaglinesAndSuch
         Hitbox player_hitbox;
         Hitbox solids_hitbox;
 
-        string flag;
+        string dropflag;
+        string permaflag;
         string texture = "rock"; //todo make this name better?
+        bool permanent;
 
         public RockCrusher(EntityData data, Vector2 offset) : base(data.Position + offset) {
 
@@ -39,7 +41,11 @@ namespace FlaglinesAndSuch
             base.Collider = player_hitbox;
             Add(new PlayerCollider(OnPlayer));
             Add(shakingSfx = new SoundSource());
+            texture = data.Attr("texture");
             rockTexture = GFX.Game["objects/FlaglinesAndSuch/RockCrusher/" + texture];
+            dropflag = data.Attr("flag");
+            permanent = data.Bool("permanent");
+            permaflag = "FLaS_rockcrusher_" + data.ID;
         }
         public override void Render()
         {
@@ -65,7 +71,7 @@ namespace FlaglinesAndSuch
                 entity = Scene.Tracker.GetEntity<Player>();
                 //TODO SLIGHT SHAKING AND PARTICLES
             }
-            while (shouldActivate(entity));        //not player above
+            while (shouldNotActivate(entity));        //not player above
 
 
             //shake in place
@@ -107,6 +113,10 @@ namespace FlaglinesAndSuch
             base.Scene.Add(Engine.Pooler.Create<Debris>().Init(Position + (Vector2.UnitY * 8), '6', true).BlastFrom(-Vector2.UnitY));
             base.Scene.Add(Engine.Pooler.Create<Debris>().Init(Position + (Vector2.UnitX * -8), '6', true).BlastFrom(Vector2.UnitX));
             base.Scene.Add(Engine.Pooler.Create<Debris>().Init(Position + (Vector2.UnitY * -8), '6', true).BlastFrom(-Vector2.UnitY));
+
+            if (permanent) {
+                (Scene as Level).Session.SetFlag(permaflag, true);
+            }
 
             RemoveSelf();
         }
@@ -167,12 +177,11 @@ namespace FlaglinesAndSuch
 
         /// <summary>
         /// whether the rock should start falling.
-        /// due to while loop shenanigans I can't be bothered to refactor this returns false when conditions are met
         /// </summary>
         /// <param name="player">player entity</param>
         /// <returns>RETURNS FALSE WHEN THE ROCK SHOULD FALL !!!!</returns>
-        private bool shouldActivate(Entity player) {
-            if (flag != "") { return !(Scene as Level).Session.GetFlag(flag); }
+        private bool shouldNotActivate(Entity player) {
+            if (dropflag != "") { return !(Scene as Level).Session.GetFlag(dropflag); }
 
             //default bounds checks
             if (player == null ||
@@ -189,6 +198,7 @@ namespace FlaglinesAndSuch
             base.Added(scene);
             //if (SceneAs<Level>().Session.GetLevelFlag("1") || SceneAs<Level>().Session.GetLevelFlag("0b"))
             //{
+            if ((Scene as Level).Session.GetFlag(dropflag) || (permanent && (Scene as Level).Session.GetFlag(permaflag)))
             //Position = end; //already triggered
             //}
             //else
