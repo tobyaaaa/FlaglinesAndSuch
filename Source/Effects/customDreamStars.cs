@@ -1,14 +1,7 @@
 ﻿using Celeste;
-using Celeste.Mod;
-using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
-using System.Collections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlaglinesAndSuch
 {
@@ -36,13 +29,16 @@ namespace FlaglinesAndSuch
 		float ParralaxScroll;
 
 		String ParticleShape;
+		
+		private static int GameplayBufferWidth => GameplayBuffers.Gameplay?.Width ?? 320;
+		private static int GameplayBufferHeight => GameplayBuffers.Gameplay?.Height ?? 180;
 
 		public customDreamStars(int count, float minSpeed, float maxSpeed, float minSize, float maxSize, String Color, float AngleX, float AngleY, float scroll, String Shape)
 		{
 			stars = new Stars[count];
 			for (int i = 0; i < stars.Length; i++)
 			{
-				stars[i].Position = new Vector2(Calc.Random.NextFloat(320f), Calc.Random.NextFloat(180f));
+				stars[i].Position = new Vector2(Calc.Random.NextFloat(GameplayBufferWidth), Calc.Random.NextFloat(GameplayBufferHeight));
 				stars[i].Speed = minSpeed + Calc.Random.NextFloat(maxSpeed - minSpeed);
 				stars[i].Size = minSize + Calc.Random.NextFloat(maxSize - minSize);
 			}
@@ -74,7 +70,7 @@ namespace FlaglinesAndSuch
 			{
 
 				//Vector2 RenderPos = new Vector2(mod(stars[i].Position.X, 320f), mod(stars[i].Position.Y, 180f));
-				Vector2 RenderPos = new Vector2(mod(stars[i].Position.X, 320f + 2 * stars[i].Size) - stars[i].Size, mod(stars[i].Position.Y, 180f + 2 * stars[i].Size) - stars[i].Size);
+				Vector2 RenderPos = new Vector2(mod(stars[i].Position.X, GameplayBufferWidth + 2 * stars[i].Size) - stars[i].Size, mod(stars[i].Position.Y, GameplayBufferHeight + 2 * stars[i].Size) - stars[i].Size);
 				switch (ParticleShape)
 				{
 

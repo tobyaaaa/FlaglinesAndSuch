@@ -1,15 +1,9 @@
 ﻿using Celeste;
-using Celeste.Mod;
-using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Monocle;
-using System.Collections;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FlaglinesAndSuch
 {
@@ -70,6 +64,9 @@ namespace FlaglinesAndSuch
 		private Ray[] rays;
 
 		private float fade;
+		
+		private static int GameplayBufferWidth => GameplayBuffers.Gameplay?.Width ?? 320;
+		private static int GameplayBufferHeight => GameplayBuffers.Gameplay?.Height ?? 180;
 
 		public CustomGodrays(int minwidth, int maxwidth, int minlength, int maxlength, float durationbase, float durationadd, float raycoloralpha, String raycolor, String raycolorfade, float scrollx, float scrolly, float speedx, float speedy, int raycount, float anglex, float angley, bool extendbounds)
 		{
@@ -121,8 +118,8 @@ namespace FlaglinesAndSuch
                 float width = rays[i].Width;
                 float length = rays[i].Length;
 
-                float Xmodrange = 384f + (extendedBounds ? width * 2 : 0);
-                float Ymodrange = 244f + (extendedBounds ? length * 2 : 0);
+                float Xmodrange = (GameplayBufferWidth + 64f) + (extendedBounds ? width * 2 : 0);
+                float Ymodrange = (GameplayBufferHeight + 64f) + (extendedBounds ? length * 2 : 0);
                 float Xadd = extendedBounds ? -width : -32;
                 float Yadd = extendedBounds ? -length : -32;
 
