@@ -28,7 +28,9 @@ namespace FlaglinesAndSuch
         private readonly int ViewX;
         private readonly int ViewY;
 
+        private float botDistV1;
         private readonly float[] TopXpts;
+        private float AccumulatedCameraMovement;
 
         private static int GameplayBufferWidth => GameplayBuffers.Gameplay?.Width ?? 320;
         private static int GameplayBufferHeight => GameplayBuffers.Gameplay?.Height ?? 180;
@@ -53,11 +55,6 @@ namespace FlaglinesAndSuch
             ViewY = yview;
             
             TopXpts = new float[linecountV];
-            
-            float botDistV1 = (float)GameplayBufferWidth / linecountV;
-            for (int i = 0; i < TopXpts.Length; i++) {
-                TopXpts[i] = OriginalHeight - (i * botDistV1); //note the height variable here is not the Height variable assigned earlier; this is independant of Flip
-            }
         }
 
 
@@ -68,12 +65,14 @@ namespace FlaglinesAndSuch
             int CameraHeight = ((Level)Engine.Scene).Camera.Viewport.Height;
             Height = FLIP ? OriginalHeight : CameraHeight - OriginalHeight;
             
+            botDistV1 = (float)GameplayBufferWidth / linecountV;
+            for (int i = 0; i < TopXpts.Length; i++) {
+                TopXpts[i] = (i * botDistV1) - botDistV1;
+            }
+            
             Vector2 position = ((Level)scene).Camera.Position;
             Vector2 value = position - lastCamera;
-            for (int i = 0; i < TopXpts.Length; i++)
-            {
-                TopXpts[i] += (value.X * scrollTop);
-            }
+            AccumulatedCameraMovement += (value.X * scrollTop);
             lastCamera = position;
 
             heightMod = (heightMod + speedV) % 1;  // uses speedV
@@ -100,7 +99,17 @@ namespace FlaglinesAndSuch
 
             for (int i = 0; i < linecountV; i++)//vertical lines
             {
-                Draw.Line(findParallaxPos(TopXpts[i]), FLIP ? 0 : CameraHeight, mod(TopXpts[i], 320), FLIP ? Height : Height + 1, mainColor);
+                if (TopXpts[i] - (CameraWidth - botDistV1) > 0)
+                    return;
+
+                if (FLIP)
+                {
+                    Draw.Line(findParallaxPos(TopXpts[i] + AccumulatedCameraMovement + 1), FLIP ? 0 : CameraHeight, mod(TopXpts[i] + AccumulatedCameraMovement + 1, CameraWidth), FLIP ? Height : Height + 1, mainColor);
+                }
+                else
+                {
+                    Draw.Line(findParallaxPos(TopXpts[i] + AccumulatedCameraMovement), FLIP ? 0 : CameraHeight, mod(TopXpts[i] + AccumulatedCameraMovement, CameraWidth), FLIP ? Height : Height + 1, mainColor);
+                }
             }
         }
 
@@ -114,7 +123,7 @@ namespace FlaglinesAndSuch
         {
             int CameraWidth = ((Level)Engine.Scene).Camera.Viewport.Width;
             
-            return ((mod(X0, 320) - (CameraWidth/2f)) * scrollBot / scrollTop) + (CameraWidth/2f);
+            return ((mod(X0, CameraWidth) - (CameraWidth / 2f)) * scrollBot / scrollTop) + (CameraWidth / 2f);
         }
 
 
@@ -125,7 +134,8 @@ namespace FlaglinesAndSuch
             
             Vector2 viewpoint = new Vector2(ViewX, ViewY);
 
-            float maxDistH = (-(FLIP ? Height : CameraHeight - Height) * viewpoint.X) / (viewpoint.Y - (FLIP ? Height : CameraHeight - Height));
+            float Backflip = FLIP ? Height : CameraHeight - Height;
+            float maxDistH = (-Backflip * viewpoint.X) / (viewpoint.Y - Backflip);
             
             float spacingH = maxDistH / linecountH;
 
@@ -136,8 +146,7 @@ namespace FlaglinesAndSuch
             for (int i = 0; i < linecountH; i++) {
                 float realposX = HLineOffset + (i) * spacingH;
                 double angle = Math.Asin(viewpoint.Y / Math.Sqrt(Math.Pow(realposX - viewpoint.X, 2) + Math.Pow(viewpoint.Y, 2)));
-                heights[i] = FLIP ? CameraHeight + Height + (int)(Math.Tan(angle) * realposX) : CameraHeight - (int) (Math.Tan(angle) * realposX);
-
+                heights[i] = FLIP ? CameraHeight + Height + (int)(Math.Tan(angle) * realposX) : CameraHeight - (int)(Math.Tan(angle) * realposX);
             }
             return heights;
         }
