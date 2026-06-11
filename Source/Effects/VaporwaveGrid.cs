@@ -10,6 +10,10 @@ namespace FlaglinesAndSuch
     {
         private Vector2 lastCamera = Vector2.Zero;
 
+        private readonly Color mainColor;
+
+        private readonly bool FLIP;
+
         private readonly int OriginalHeight;
         private int Height;//how high up the screen the top lines are
 
@@ -22,9 +26,6 @@ namespace FlaglinesAndSuch
         private readonly float scrollTop;
         private readonly float scrollBot;
 
-        private readonly Color mainColor;
-
-        private readonly bool FLIP;//seems to still have some issues-namely, moving H. lines move the wrong way, and there seem to be less of them onscreen
         private readonly int ViewX;
         private readonly int ViewY;
 
@@ -32,28 +33,25 @@ namespace FlaglinesAndSuch
         private readonly float[] TopXpts;
         private float AccumulatedCameraMovement;
 
-        private static int GameplayBufferWidth => GameplayBuffers.Gameplay?.Width ?? 320;
-        private static int GameplayBufferHeight => GameplayBuffers.Gameplay?.Height ?? 180;
-        
         public VaporwaveGrid(string color, int Hlines, int Vlines, float scrollT, float scrollB, int height, int xview, int yview, bool flipit, float speedy) {
-            
+
+            mainColor = Calc.HexToColor(color);
+
+            FLIP = flipit;
+
             OriginalHeight = height;
-            Height = FLIP ? OriginalHeight : GameplayBufferHeight - OriginalHeight;
-            
+
             linecountH = Hlines;
             linecountV = Vlines;
-            
+
             speedV = speedy;
-            
+
             scrollTop = -scrollT;
             scrollBot = -scrollB;
-            
-            mainColor = Calc.HexToColor(color);
-            
-            FLIP = flipit;
+
             ViewX = FLIP ? -xview : xview;
             ViewY = yview;
-            
+
             TopXpts = new float[linecountV];
         }
 
@@ -61,15 +59,14 @@ namespace FlaglinesAndSuch
         public override void Update(Scene scene)
         {
             base.Update(scene);
-            
-            int CameraHeight = ((Level)Engine.Scene).Camera.Viewport.Height;
-            Height = FLIP ? OriginalHeight : CameraHeight - OriginalHeight;
-            
-            botDistV1 = (float)GameplayBufferWidth / linecountV;
+
+            int CameraWidth = ((Level)Engine.Scene).Camera.Viewport.Width;
+
+            botDistV1 = (float)CameraWidth / linecountV;
             for (int i = 0; i < TopXpts.Length; i++) {
                 TopXpts[i] = (i * botDistV1) - botDistV1;
             }
-            
+
             Vector2 position = ((Level)scene).Camera.Position;
             Vector2 value = position - lastCamera;
             AccumulatedCameraMovement += (value.X * scrollTop);
@@ -83,32 +80,37 @@ namespace FlaglinesAndSuch
         {
             int CameraWidth = ((Level)Engine.Scene).Camera.Viewport.Width;
             int CameraHeight = ((Level)Engine.Scene).Camera.Viewport.Height;
-            
-            Draw.Line(0, Height, CameraWidth, Height, mainColor);//make sure there's always a line at the horizon
-            
-            int[] HlineHeights = getProjectedHeights();
-            for (int i = 0; i < linecountH; i += 1) {// horizontal line rendering
 
-                if (FLIP) {
-                    Draw.Line(0, CameraHeight + Height - HlineHeights[i], CameraWidth, CameraHeight + Height - HlineHeights[i], mainColor);
-                }
-                else {
-                    Draw.Line(0, HlineHeights[i], CameraWidth, HlineHeights[i], mainColor);
+            Height = FLIP ? OriginalHeight : CameraHeight - OriginalHeight;
+
+            Draw.Line(0, Height, CameraWidth, Height, mainColor);//make sure there's always a line at the horizon
+
+            // horizontal line rendering
+            int[] HlineHeights = getProjectedHeights();
+            for (int i = 0; i < linecountH; i += 1)
+            {
+                switch (FLIP)
+                {
+                    case true:
+                        Draw.Line(0, CameraHeight + Height - HlineHeights[i], CameraWidth, CameraHeight + Height - HlineHeights[i], mainColor);
+                        break;
+                    default:
+                        Draw.Line(0, HlineHeights[i], CameraWidth, HlineHeights[i], mainColor);
+                        break;
                 }
             }
 
-            for (int i = 0; i < linecountV; i++)//vertical lines
+            //vertical line rendering
+            for (int i = 0; i < linecountV; i++)
             {
-                if (TopXpts[i] - (CameraWidth - botDistV1) > 0)
-                    return;
-
-                if (FLIP)
+                switch (FLIP)
                 {
-                    Draw.Line(findParallaxPos(TopXpts[i] + AccumulatedCameraMovement + 1), FLIP ? 0 : CameraHeight, mod(TopXpts[i] + AccumulatedCameraMovement + 1, CameraWidth), FLIP ? Height : Height + 1, mainColor);
-                }
-                else
-                {
-                    Draw.Line(findParallaxPos(TopXpts[i] + AccumulatedCameraMovement), FLIP ? 0 : CameraHeight, mod(TopXpts[i] + AccumulatedCameraMovement, CameraWidth), FLIP ? Height : Height + 1, mainColor);
+                    case true:
+                        Draw.Line(findParallaxPos(TopXpts[i] + AccumulatedCameraMovement + 1), 0, mod(TopXpts[i] + AccumulatedCameraMovement + 1, CameraWidth), Height, mainColor);
+                        break;
+                    default:
+                        Draw.Line(findParallaxPos(TopXpts[i] + AccumulatedCameraMovement), CameraWidth, mod(TopXpts[i] + AccumulatedCameraMovement, CameraWidth), Height + 1, mainColor);
+                        break;
                 }
             }
         }
@@ -131,12 +133,12 @@ namespace FlaglinesAndSuch
         private int[] getProjectedHeights()
         {
             int CameraHeight = ((Level)Engine.Scene).Camera.Viewport.Height;
-            
+
             Vector2 viewpoint = new Vector2(ViewX, ViewY);
 
             float Backflip = FLIP ? Height : CameraHeight - Height;
             float maxDistH = (-Backflip * viewpoint.X) / (viewpoint.Y - Backflip);
-            
+
             float spacingH = maxDistH / linecountH;
 
             float HLineOffset = (heightMod * spacingH) % spacingH;
